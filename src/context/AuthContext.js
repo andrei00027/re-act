@@ -37,6 +37,25 @@ export const AuthProvider = ({ children }) => {
         throw new Error('Apple Authentication is only available on iOS');
       }
 
+      // MOCK для симулятора - Sign in with Apple не работает в симуляторе
+      // Проверяем, реально ли доступна аутентификация
+      const isAvailable = await AppleAuthentication.isAvailableAsync();
+
+      if (!isAvailable) {
+        // Используем mock-данные для разработки в симуляторе
+        console.log('🔧 Using mock authentication for simulator');
+        const mockUserData = {
+          id: 'mock-user-' + Date.now(),
+          email: 'developer@momentumflow.app',
+          fullName: 'Dev User',
+          authToken: 'mock-token-' + Date.now(),
+        };
+
+        await SecureStore.setItemAsync(USER_KEY, JSON.stringify(mockUserData));
+        setUser(mockUserData);
+        return mockUserData;
+      }
+
       const credential = await AppleAuthentication.signInAsync({
         requestedScopes: [
           AppleAuthentication.AppleAuthenticationScope.FULL_NAME,

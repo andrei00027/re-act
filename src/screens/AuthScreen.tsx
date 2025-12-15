@@ -53,23 +53,18 @@ export default function AuthScreen() {
           </View>
         </View>
 
-        {isAvailable ? (
-          <AppleAuthentication.AppleAuthenticationButton
-            buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
-            buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
-            cornerRadius={Sizes.borderRadius.md}
-            style={styles.appleButton}
-            onPress={handleSignIn}
-          />
-        ) : (
-          <View style={styles.notAvailable}>
-            <Text style={styles.notAvailableText}>
-              Apple Sign In недоступен на этом устройстве
-            </Text>
-            <Text style={styles.notAvailableSubtext}>
-              {Platform.OS !== 'ios'
-                ? 'Требуется iOS устройство'
-                : 'Проверьте настройки Apple ID'}
+        <AppleAuthentication.AppleAuthenticationButton
+          buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+          buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
+          cornerRadius={Sizes.borderRadius.md}
+          style={styles.appleButton}
+          onPress={handleSignIn}
+        />
+
+        {!isAvailable && (
+          <View style={styles.devBadge}>
+            <Text style={styles.devBadgeText}>
+              🔧 Режим разработки: будет использована mock-аутентификация
             </Text>
           </View>
         )}
@@ -156,5 +151,20 @@ const styles = StyleSheet.create({
     color: Colors.textSecondary,
     textAlign: 'center',
     lineHeight: 20,
+  },
+  devBadge: {
+    backgroundColor: Colors.primary + '20',
+    borderRadius: Sizes.borderRadius.md,
+    padding: Sizes.spacing.md,
+    marginTop: Sizes.spacing.md,
+    marginBottom: Sizes.spacing.lg,
+    borderWidth: 1,
+    borderColor: Colors.primary + '40',
+  },
+  devBadgeText: {
+    fontSize: Sizes.fontSize.sm,
+    color: Colors.primary,
+    textAlign: 'center',
+    fontWeight: '600',
   },
 });
