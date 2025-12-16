@@ -9,7 +9,6 @@ export const AsyncStorageService = {
     try {
       const jsonValue = JSON.stringify(habits);
       await AsyncStorage.setItem(HABITS_KEY, jsonValue);
-      console.log('✅ Привычки сохранены');
     } catch (error) {
       console.error('❌ Ошибка при сохранении привычек:', error);
       throw error;
@@ -21,10 +20,8 @@ export const AsyncStorageService = {
     try {
       const jsonValue = await AsyncStorage.getItem(HABITS_KEY);
       if (jsonValue !== null) {
-        console.log('✅ Привычки загружены');
         return JSON.parse(jsonValue);
       }
-      console.log('ℹ️ Привычек нет, возвращаем пустой массив');
       return [];
     } catch (error) {
       console.error('❌ Ошибка при загрузке привычек:', error);
@@ -36,7 +33,6 @@ export const AsyncStorageService = {
   async clearAll() {
     try {
       await AsyncStorage.removeItem(HABITS_KEY);
-      console.log('✅ Все данные очищены');
     } catch (error) {
       console.error('❌ Ошибка при очистке данных:', error);
       throw error;

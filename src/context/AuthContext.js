@@ -38,16 +38,16 @@ export const AuthProvider = ({ children }) => {
       }
 
       // MOCK для симулятора - Sign in with Apple не работает в симуляторе
-      // Проверяем, реально ли доступна аутентификация
-      const isAvailable = await AppleAuthentication.isAvailableAsync();
+      // Используем константу __DEV__ для определения режима разработки
+      const isSimulator = Platform.constants.simulator || __DEV__;
 
-      if (!isAvailable) {
+      if (isSimulator) {
         // Используем mock-данные для разработки в симуляторе
-        console.log('🔧 Using mock authentication for simulator');
+        console.log('🔧 Using mock authentication for iOS Simulator');
         const mockUserData = {
-          id: 'mock-user-' + Date.now(),
+          id: 'mock-user-simulator',
           email: 'developer@momentumflow.app',
-          fullName: 'Dev User',
+          fullName: 'Dev User (Simulator)',
           authToken: 'mock-token-' + Date.now(),
         };
 
@@ -56,6 +56,7 @@ export const AuthProvider = ({ children }) => {
         return mockUserData;
       }
 
+      // Реальная авторизация на физическом устройстве
       const credential = await AppleAuthentication.signInAsync({
         requestedScopes: [
           AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
@@ -79,12 +80,11 @@ export const AuthProvider = ({ children }) => {
 
       return userData;
     } catch (error) {
-      if (error.code === 'ERR_CANCELED') {
-        console.log('User canceled Apple Sign In');
-      } else {
+      if (error.code !== 'ERR_CANCELED') {
         console.error('Error signing in with Apple:', error);
         throw error;
       }
+      // User canceled, silently return
     }
   };
 

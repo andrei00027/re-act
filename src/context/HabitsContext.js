@@ -65,18 +65,15 @@ export const HabitsProvider = ({ children }) => {
       try {
         // Инициализация уведомлений
         await NotificationService.requestPermissions();
-      } catch (error) {
-        console.log('Notifications not supported on this device:', error.message);
+      } catch {
+        // Notifications not supported on this device
       }
 
       try {
         // Инициализация HealthKit
-        const healthInitialized = await AppleHealthService.initialize();
-        if (healthInitialized) {
-          console.log('Apple Health initialized successfully');
-        }
-      } catch (error) {
-        console.log('Apple Health not available:', error.message);
+        await AppleHealthService.initialize();
+      } catch {
+        // Apple Health not available
       }
     };
 
@@ -289,7 +286,6 @@ export const HabitsProvider = ({ children }) => {
       // Проверить доступность облака
       const availabilityStatus = await CloudStorageService.isAvailable();
       if (!availabilityStatus.available) {
-        console.log('Cloud storage not available:', availabilityStatus.error);
         return { success: false, error: availabilityStatus.error };
       }
 

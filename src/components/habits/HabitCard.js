@@ -28,6 +28,7 @@ export const HabitCard = ({ habit, onComplete, isCompleted, onLongPress, index =
         useNativeDriver: true,
       }),
     ]).start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handlePress = () => {

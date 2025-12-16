@@ -51,7 +51,7 @@ export default function ProfileScreen() {
               // Затем перезагрузить привычки (загрузятся моковые данные)
               await reloadHabits();
               Alert.alert(t('common.success'), t('profile.clearDataSuccess'));
-            } catch (error) {
+            } catch {
               Alert.alert(t('common.error'), t('errors.storage'));
             }
           },
@@ -80,7 +80,7 @@ export default function ProfileScreen() {
           onPress: async () => {
             try {
               await signOut();
-            } catch (error) {
+            } catch {
               Alert.alert(t('common.error'), t('errors.generic'));
             }
           },
@@ -123,7 +123,7 @@ export default function ProfileScreen() {
       } else {
         Alert.alert(t('common.success'), t('profile.healthCheckNoData'));
       }
-    } catch (error) {
+    } catch {
       Alert.alert(t('common.error'), t('profile.healthCheckError'));
     }
   };

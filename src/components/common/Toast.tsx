@@ -1,6 +1,6 @@
 // src/components/common/Toast.tsx
 import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { Text, StyleSheet, Animated } from 'react-native';
 import { Colors, Sizes } from '@/src/constants';
 
 interface ToastProps {
@@ -22,6 +22,23 @@ export const Toast: React.FC<ToastProps> = ({
   const translateY = useRef(new Animated.Value(-100)).current;
 
   useEffect(() => {
+    const hideToast = () => {
+      Animated.parallel([
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(translateY, {
+          toValue: -100,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]).start(() => {
+        onHide();
+      });
+    };
+
     if (visible) {
       // Показать toast
       Animated.parallel([
@@ -47,24 +64,7 @@ export const Toast: React.FC<ToastProps> = ({
     } else {
       hideToast();
     }
-  }, [visible]);
-
-  const hideToast = () => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-      Animated.timing(translateY, {
-        toValue: -100,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-    ]).start(() => {
-      onHide();
-    });
-  };
+  }, [visible, duration, fadeAnim, translateY, onHide]);
 
   if (!visible && fadeAnim._value === 0) {
     return null;

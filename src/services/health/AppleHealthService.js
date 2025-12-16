@@ -27,7 +27,6 @@ class AppleHealthService {
    */
   async initialize() {
     if (!this.isAvailable) {
-      console.log('Apple Health is only available on iOS');
       return false;
     }
 
@@ -38,7 +37,6 @@ class AppleHealthService {
           this.isInitialized = false;
           resolve(false);
         } else {
-          console.log('HealthKit initialized successfully');
           this.isInitialized = true;
           resolve(true);
         }

@@ -47,7 +47,7 @@ export default function HomeScreen() {
       addHabit(habitData);
       setCreateModalVisible(false);
       showSuccess(t('habits.saveSuccess'));
-    } catch (error) {
+    } catch {
       showError(t('errors.storage'));
     }
   };
@@ -74,7 +74,7 @@ export default function HomeScreen() {
         setEditModalVisible(false);
         setSelectedHabit(null);
         showSuccess(t('habits.saveSuccess'));
-      } catch (error) {
+      } catch {
         showError(t('errors.storage'));
       }
     }
@@ -85,7 +85,7 @@ export default function HomeScreen() {
       deleteHabit(id);
       setSelectedHabit(null);
       showSuccess(t('habits.deleteSuccess'));
-    } catch (error) {
+    } catch {
       showError(t('errors.storage'));
     }
   };

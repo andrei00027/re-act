@@ -9,8 +9,10 @@ class CloudStorageService {
     // Путь к облачному хранилищу
     // Для iCloud нужно использовать cacheDirectory или documentDirectory
     // в зависимости от конфигурации entitlements
-    this.cloudDirectory = FileSystem.documentDirectory;
-    this.cloudFilePath = `${this.cloudDirectory}${CLOUD_FILE_NAME}`;
+    // Используем legacy API для совместимости
+    // eslint-disable-next-line import/namespace
+    const docDir = FileSystem.documentDirectory || '';
+    this.cloudFilePath = `${docDir}${CLOUD_FILE_NAME}`;
 
     // Для настоящей работы с iCloud Drive требуется:
     // 1. EAS Build с настройкой iCloud capabilities
@@ -27,7 +29,6 @@ class CloudStorageService {
     try {
       // iOS автоматически синхронизирует documentDirectory с iCloud Drive
       if (Platform.OS !== 'ios') {
-        console.log('Cloud sync is only available on iOS');
         return localHabits;
       }
 
@@ -79,7 +80,6 @@ class CloudStorageService {
     try {
       const content = JSON.stringify(habits, null, 2);
       await FileSystem.writeAsStringAsync(this.cloudFilePath, content);
-      console.log('Data saved to cloud:', this.cloudFilePath);
     } catch (error) {
       console.error('Error saving to cloud:', error);
       throw error;
