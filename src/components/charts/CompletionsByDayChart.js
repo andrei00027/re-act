@@ -2,12 +2,11 @@
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Colors } from '@/src/constants/Colors';
-
-const CHART_COLOR = Colors.primary;
+import { useThemeColors } from '@/src/hooks/useThemeColors';
 
 const CompletionsByDayChart = ({ completionHistory }) => {
   const { t } = useTranslation();
+  const colors = useThemeColors();
 
   // Short day keys in order: Monday to Sunday
   const dayKeys = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
@@ -46,6 +45,8 @@ const CompletionsByDayChart = ({ completionHistory }) => {
     };
   }, [completionHistory]);
 
+  const styles = createStyles(colors);
+
   if (!chartData) {
     return null;
   }
@@ -68,7 +69,7 @@ const CompletionsByDayChart = ({ completionHistory }) => {
                   {
                     width: barWidth,
                     height: Math.max(barHeight, 2),
-                    backgroundColor: count > 0 ? CHART_COLOR : Colors.border,
+                    backgroundColor: count > 0 ? colors.primary : colors.border,
                   },
                 ]}
               />
@@ -81,7 +82,7 @@ const CompletionsByDayChart = ({ completionHistory }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors) => StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
   },
   dayLabel: {
     fontSize: 10,
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
     marginTop: 4,
   },
 });

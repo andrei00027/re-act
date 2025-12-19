@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
-import { Colors, Sizes } from '@/src/constants';
+import { Sizes } from '@/src/constants';
+import { useThemeColors } from '@/src/hooks/useThemeColors';
 import { useHabits } from '@/src/context/HabitsContext';
 import { useMemo, useState } from 'react';
 import DynamicsChart from '@/src/components/charts/DynamicsChart';
@@ -9,10 +10,9 @@ import TimeChart from '@/src/components/charts/TimeChart';
 import CompletionsByDayChart from '@/src/components/charts/CompletionsByDayChart';
 import { HabitIcon } from '@/src/components/common/HabitIcon';
 
-const CHART_COLOR = Colors.primary;
-
 export default function StatsScreen() {
   const { t } = useTranslation();
+  const colors = useThemeColors();
   const { habits } = useHabits();
   const [selectedHabitId, setSelectedHabitId] = useState<string | null>(null);
 
@@ -63,6 +63,8 @@ export default function StatsScreen() {
     };
   }, [selectedHabit]);
 
+  const styles = createStyles(colors);
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
@@ -86,7 +88,7 @@ export default function StatsScreen() {
                   <HabitIcon
                     name={habit.icon}
                     size={20}
-                    color={selectedHabit.id === habit.id ? CHART_COLOR : Colors.textSecondary}
+                    color={selectedHabit.id === habit.id ? colors.primary : colors.textSecondary}
                   />
                   <Text style={[
                     styles.habitSelectorText,
@@ -146,10 +148,10 @@ export default function StatsScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ReturnType<typeof useThemeColors>) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background,
+    backgroundColor: colors.background,
   },
   header: {
     paddingHorizontal: Sizes.spacing.md,
@@ -158,7 +160,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: Sizes.fontSize.xxl,
     fontWeight: 'bold',
-    color: Colors.text,
+    color: colors.text,
   },
   content: {
     flex: 1,
@@ -175,7 +177,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.surface,
+    backgroundColor: colors.surface,
     paddingHorizontal: Sizes.spacing.md,
     paddingVertical: Sizes.spacing.sm,
     borderRadius: Sizes.borderRadius.lg,
@@ -185,17 +187,17 @@ const styles = StyleSheet.create({
     width: '48%',
   },
   habitSelectorItemActive: {
-    backgroundColor: CHART_COLOR + '15',
-    borderColor: CHART_COLOR,
+    backgroundColor: colors.primary + '15',
+    borderColor: colors.primary,
   },
   habitSelectorText: {
     fontSize: Sizes.fontSize.sm,
-    color: Colors.text,
+    color: colors.text,
     fontWeight: '500',
     maxWidth: 100,
   },
   habitSelectorTextActive: {
-    color: CHART_COLOR,
+    color: colors.primary,
     fontWeight: '700',
   },
   topStatsRow: {
@@ -211,18 +213,18 @@ const styles = StyleSheet.create({
   topStatValue: {
     fontSize: 32,
     fontWeight: '900',
-    color: Colors.text,
+    color: colors.text,
     marginBottom: 4,
   },
   topStatLabel: {
     fontSize: 11,
     fontWeight: '700',
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
     textAlign: 'center',
     letterSpacing: 0.5,
   },
   completionsSection: {
-    backgroundColor: Colors.white,
+    backgroundColor: colors.surface,
     borderRadius: 16,
     padding: Sizes.spacing.md,
     marginBottom: Sizes.spacing.lg,
@@ -230,7 +232,7 @@ const styles = StyleSheet.create({
   completionsTitle: {
     fontSize: 13,
     fontWeight: '700',
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
     marginBottom: Sizes.spacing.md,
     textAlign: 'center',
     letterSpacing: 0.5,
@@ -250,12 +252,12 @@ const styles = StyleSheet.create({
   emptyStateTitle: {
     fontSize: Sizes.fontSize.xl,
     fontWeight: '600',
-    color: Colors.text,
+    color: colors.text,
     marginBottom: Sizes.spacing.sm,
   },
   emptyStateSubtitle: {
     fontSize: Sizes.fontSize.md,
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
     textAlign: 'center',
   },
 });

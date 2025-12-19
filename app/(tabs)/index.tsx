@@ -3,7 +3,8 @@ import { StyleSheet, View, TouchableOpacity, Text, SectionList, RefreshControl }
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
-import { Colors, Sizes } from '@/src/constants';
+import { Sizes } from '@/src/constants';
+import { useThemeColors } from '@/src/hooks/useThemeColors';
 import { useHabits } from '@/src/context/HabitsContext';
 import { HabitCard } from '@/src/components/habits/HabitCard';
 import { CreateHabitModal } from '@/src/components/habits/CreateHabitModal';
@@ -15,6 +16,7 @@ import { useToast } from '@/src/hooks/useToast';
 
 export default function HomeScreen() {
   const { t } = useTranslation();
+  const colors = useThemeColors();
   const { habits, completeHabit, uncompleteHabit, isCompletedToday, isScheduledForToday, addHabit, updateHabit, deleteHabit, reloadHabits, isLoaded } = useHabits();
   const [createModalVisible, setCreateModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
@@ -117,6 +119,8 @@ export default function HomeScreen() {
     }
   };
 
+  const styles = createStyles(colors);
+
   if (!isLoaded) {
     return (
       <SafeAreaView style={styles.container} edges={['top']}>
@@ -147,7 +151,7 @@ export default function HomeScreen() {
         <SectionList
           sections={sections}
           keyExtractor={(item: any) => item.id}
-          renderItem={({ item, index, section }: any) => (
+          renderItem={({ item, index }: any) => (
             <HabitCard
               habit={item}
               index={index}
@@ -183,8 +187,8 @@ export default function HomeScreen() {
             <RefreshControl
               refreshing={refreshing}
               onRefresh={handleRefresh}
-              tintColor={Colors.primary}
-              colors={[Colors.primary]}
+              tintColor={colors.primary}
+              colors={[colors.primary]}
             />
           }
         />
@@ -222,10 +226,10 @@ export default function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ReturnType<typeof useThemeColors>) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background,
+    backgroundColor: colors.background,
   },
   header: {
     flexDirection: 'row',
@@ -237,20 +241,20 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: Sizes.fontSize.xxl,
     fontWeight: Sizes.fontWeight.bold,
-    color: Colors.text,
+    color: colors.text,
   },
   addButton: {
     width: 44,
     height: 44,
     borderRadius: Sizes.borderRadius.full,
-    backgroundColor: Colors.primary,
+    backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
     ...Sizes.shadow.lg,
   },
   addButtonText: {
     fontSize: 28,
-    color: Colors.surface,
+    color: colors.surface,
     fontWeight: '300',
     marginTop: -2,
   },
@@ -266,23 +270,23 @@ const styles = StyleSheet.create({
   },
   progressText: {
     fontSize: Sizes.fontSize.md,
-    color: Colors.text,
+    color: colors.text,
     fontWeight: Sizes.fontWeight.semibold,
   },
   progressPercentage: {
     fontSize: Sizes.fontSize.lg,
-    color: Colors.primary,
+    color: colors.primary,
     fontWeight: Sizes.fontWeight.bold,
   },
   progressBarContainer: {
     height: 6,
-    backgroundColor: Colors.surface,
+    backgroundColor: colors.surface,
     borderRadius: Sizes.borderRadius.md,
     overflow: 'hidden',
   },
   progressBar: {
     height: '100%',
-    backgroundColor: Colors.success,
+    backgroundColor: colors.success,
     borderRadius: Sizes.borderRadius.md,
   },
   listContent: {
@@ -299,7 +303,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: Sizes.fontSize.lg,
     fontWeight: Sizes.fontWeight.semibold,
-    color: Colors.text,
+    color: colors.text,
   },
   emptyContainer: {
     flex: 1,
@@ -314,14 +318,14 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: Sizes.fontSize.xxl,
     fontWeight: Sizes.fontWeight.bold,
-    color: Colors.text,
+    color: colors.text,
     marginBottom: Sizes.spacing.sm,
     textAlign: 'center',
   },
   emptyText: {
     fontSize: Sizes.fontSize.md,
     fontWeight: Sizes.fontWeight.medium,
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
     textAlign: 'center',
   },
 });

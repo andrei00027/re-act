@@ -2,12 +2,14 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import * as Haptics from 'expo-haptics';
-import { Colors, Sizes } from '@/src/constants';
+import { Sizes } from '@/src/constants';
+import { useThemeColors } from '@/src/hooks/useThemeColors';
 import { HabitIcon } from '@/src/components/common/HabitIcon';
 import { tPlural } from '@/src/i18n';
 import { useHabits } from '@/src/context/HabitsContext';
 
 export const HabitCard = ({ habit, onComplete, isCompleted, onPress, index = 0 }) => {
+  const colors = useThemeColors();
   const { getQuitHabitStreak } = useHabits();
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(0.9)).current;
@@ -58,6 +60,8 @@ export const HabitCard = ({ habit, onComplete, isCompleted, onPress, index = 0 }
     onPress?.(habit);
   };
 
+  const styles = createStyles(colors);
+
   return (
     <Animated.View
       style={{
@@ -76,7 +80,7 @@ export const HabitCard = ({ habit, onComplete, isCompleted, onPress, index = 0 }
               <HabitIcon
                 name={habit.icon || 'checkmark'}
                 size={32}
-                color={Colors.primary}
+                color={colors.primary}
               />
             </View>
             <View style={styles.info}>
@@ -115,11 +119,11 @@ export const HabitCard = ({ habit, onComplete, isCompleted, onPress, index = 0 }
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors) => StyleSheet.create({
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.surface,
+    backgroundColor: colors.surface,
     borderRadius: Sizes.borderRadius.lg,
     padding: Sizes.spacing.md,
     marginBottom: Sizes.spacing.md,
@@ -143,40 +147,40 @@ const styles = StyleSheet.create({
   name: {
     fontSize: Sizes.fontSize.lg,
     fontWeight: Sizes.fontWeight.semibold,
-    color: Colors.text,
+    color: colors.text,
     marginBottom: Sizes.spacing.xs,
   },
   streak: {
     fontSize: Sizes.fontSize.sm,
     fontWeight: Sizes.fontWeight.medium,
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
   },
   quitStreak: {
-    color: Colors.success,
+    color: colors.success,
   },
   checkbox: {
     width: 32,
     height: 32,
     borderRadius: Sizes.borderRadius.full,
     borderWidth: 2,
-    borderColor: Colors.border,
+    borderColor: colors.border,
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: Sizes.spacing.sm,
   },
   checkboxCompleted: {
-    backgroundColor: Colors.success,
-    borderColor: Colors.success,
+    backgroundColor: colors.success,
+    borderColor: colors.success,
   },
   checkboxQuit: {
-    borderColor: Colors.error,
+    borderColor: colors.error,
   },
   checkboxSlip: {
-    backgroundColor: Colors.error,
-    borderColor: Colors.error,
+    backgroundColor: colors.error,
+    borderColor: colors.error,
   },
   checkmark: {
-    color: Colors.surface,
+    color: colors.surface,
     fontSize: 18,
     fontWeight: Sizes.fontWeight.bold,
   },

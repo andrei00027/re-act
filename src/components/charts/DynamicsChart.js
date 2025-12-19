@@ -3,16 +3,15 @@ import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { useTranslation } from 'react-i18next';
-import { Colors } from '@/src/constants/Colors';
+import { useThemeColors } from '@/src/hooks/useThemeColors';
 import { tPlural } from '@/src/i18n';
 
 const screenWidth = Dimensions.get('window').width;
-const CHART_COLOR = Colors.primary;
 
 const DynamicsChart = ({ completionHistory }) => {
   const { t, i18n } = useTranslation();
+  const colors = useThemeColors();
 
-  // Get locale for date formatting based on current language
   const getDateLocale = () => {
     const localeMap = {
       'ru': 'ru-RU',
@@ -29,11 +28,9 @@ const DynamicsChart = ({ completionHistory }) => {
       return null;
     }
 
-    // Get all dates and sort
     const dates = Object.keys(completionHistory).sort();
     if (dates.length < 2) return null;
 
-    // Calculate rolling completion rate (7-day window)
     const windowSize = 7;
     const rateData = [];
     const labels = [];
@@ -48,7 +45,6 @@ const DynamicsChart = ({ completionHistory }) => {
       const rate = (completed / windowDates.length) * 100;
       rateData.push(rate);
 
-      // Only show labels at start, middle, and end
       if (i === 0 || i === dates.length - 1 || i === Math.floor(dates.length / 2)) {
         if (i === 0) {
           const startDate = new Date(dates[0]);
@@ -60,7 +56,6 @@ const DynamicsChart = ({ completionHistory }) => {
         } else if (i === dates.length - 1) {
           labels.push(t('charts.today').toUpperCase());
         } else {
-          // Use proper pluralization for days count
           const daysText = tPlural('habits.days', dates.length).toUpperCase();
           labels.push(daysText);
         }
@@ -69,7 +64,6 @@ const DynamicsChart = ({ completionHistory }) => {
       }
     }
 
-    // Format start date label
     const startDate = new Date(dates[0]);
     const locale = getDateLocale();
     const day = startDate.getDate();
@@ -81,13 +75,15 @@ const DynamicsChart = ({ completionHistory }) => {
       labels,
       datasets: [{
         data: rateData,
-        color: () => CHART_COLOR,
+        color: () => colors.primary,
         strokeWidth: 2,
       }],
       startLabel,
       totalDays: dates.length,
     };
-  }, [completionHistory, t, i18n.language]);
+  }, [completionHistory, t, i18n.language, colors.primary]);
+
+  const styles = createStyles(colors);
 
   if (!chartData) {
     return (
@@ -98,7 +94,6 @@ const DynamicsChart = ({ completionHistory }) => {
     );
   }
 
-  // Calculate current completion rate for display
   const currentRate = chartData.datasets[0].data[chartData.datasets[0].data.length - 1];
 
   return (
@@ -112,42 +107,42 @@ const DynamicsChart = ({ completionHistory }) => {
       </View>
       <View style={styles.chartWrapper}>
         <LineChart
-        data={chartData}
-        width={screenWidth - 32}
-        height={80}
-        withDots={true}
-        withInnerLines={false}
-        withOuterLines={false}
-        withVerticalLines={false}
-        withHorizontalLines={false}
-        withVerticalLabels={false}
-        withHorizontalLabels={false}
-        yAxisSuffix="%"
-        fromZero={true}
-        chartConfig={{
-          backgroundColor: 'transparent',
-          backgroundGradientFrom: Colors.white,
-          backgroundGradientTo: Colors.white,
-          backgroundGradientFromOpacity: 0,
-          backgroundGradientToOpacity: 0,
-          decimalPlaces: 0,
-          color: () => CHART_COLOR,
-          labelColor: () => Colors.textSecondary,
-          propsForDots: {
-            r: '5',
-            strokeWidth: '0',
-            fill: CHART_COLOR,
-          },
-          propsForLabels: {
-            fontSize: 10,
-            fontWeight: '600',
-          },
-          fillShadowGradient: 'transparent',
-          fillShadowGradientOpacity: 0,
-        }}
-        bezier
-        style={styles.chart}
-      />
+          data={chartData}
+          width={screenWidth - 32}
+          height={80}
+          withDots={true}
+          withInnerLines={false}
+          withOuterLines={false}
+          withVerticalLines={false}
+          withHorizontalLines={false}
+          withVerticalLabels={false}
+          withHorizontalLabels={false}
+          yAxisSuffix="%"
+          fromZero={true}
+          chartConfig={{
+            backgroundColor: 'transparent',
+            backgroundGradientFrom: colors.surface,
+            backgroundGradientTo: colors.surface,
+            backgroundGradientFromOpacity: 0,
+            backgroundGradientToOpacity: 0,
+            decimalPlaces: 0,
+            color: () => colors.primary,
+            labelColor: () => colors.textSecondary,
+            propsForDots: {
+              r: '5',
+              strokeWidth: '0',
+              fill: colors.primary,
+            },
+            propsForLabels: {
+              fontSize: 10,
+              fontWeight: '600',
+            },
+            fillShadowGradient: 'transparent',
+            fillShadowGradientOpacity: 0,
+          }}
+          bezier
+          style={styles.chart}
+        />
       </View>
       <View style={styles.labelsContainer}>
         <Text style={styles.label}>{chartData.startLabel}</Text>
@@ -157,9 +152,9 @@ const DynamicsChart = ({ completionHistory }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors) => StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
+    backgroundColor: colors.surface,
     borderRadius: 16,
     paddingTop: 16,
     paddingBottom: 12,
@@ -175,7 +170,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: '600',
-    color: Colors.text,
+    color: colors.text,
   },
   rateContainer: {
     alignItems: 'flex-end',
@@ -183,11 +178,11 @@ const styles = StyleSheet.create({
   rateValue: {
     fontSize: 18,
     fontWeight: '700',
-    color: CHART_COLOR,
+    color: colors.primary,
   },
   rateLabel: {
     fontSize: 11,
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
   },
   chartWrapper: {
     marginHorizontal: -16,
@@ -204,10 +199,10 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 10,
     fontWeight: '600',
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
   },
   emptyContainer: {
-    backgroundColor: Colors.white,
+    backgroundColor: colors.surface,
     borderRadius: 16,
     padding: 32,
     alignItems: 'center',
@@ -217,13 +212,13 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 16,
     fontWeight: '600',
-    color: Colors.text,
+    color: colors.text,
     marginBottom: 8,
     textAlign: 'center',
   },
   emptySubtext: {
     fontSize: 14,
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
     textAlign: 'center',
   },
 });

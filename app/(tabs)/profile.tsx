@@ -2,17 +2,22 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, ActivityIndicator, Platform, Modal, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
-import Icon from 'react-native-remix-icon';
-import { Colors, Sizes } from '@/src/constants';
+import Icon, { IconName } from 'react-native-remix-icon';
+import { Sizes } from '@/src/constants';
+import { useThemeColors } from '@/src/hooks/useThemeColors';
+import { useTheme, THEME_OPTIONS, ThemeMode } from '@/src/context/ThemeContext';
 import { useHabits } from '@/src/context/HabitsContext';
 import { useAuth } from '@/src/context/AuthContext';
 import { SUPPORTED_LANGUAGES, changeLanguage, LanguageCode } from '@/src/i18n';
 
 export default function ProfileScreen() {
   const { t, i18n } = useTranslation();
+  const colors = useThemeColors();
+  const { themeMode, setThemeMode } = useTheme();
   const { syncWithCloud, isSyncing, lastSyncTime, checkHealthKitGoals } = useHabits();
   const { user, signOut, deleteAccount } = useAuth();
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
+  const [themeModalVisible, setThemeModalVisible] = useState(false);
 
   const handleLanguageChange = async (langCode: LanguageCode) => {
     try {
@@ -23,9 +28,23 @@ export default function ProfileScreen() {
     }
   };
 
+  const handleThemeChange = async (mode: ThemeMode) => {
+    try {
+      await setThemeMode(mode);
+      setThemeModalVisible(false);
+    } catch {
+      Alert.alert(t('common.error'), t('errors.generic'));
+    }
+  };
+
   const getCurrentLanguageName = () => {
     const currentLang = SUPPORTED_LANGUAGES.find(lang => lang.code === i18n.language);
     return currentLang?.nativeName || 'English';
+  };
+
+  const getCurrentThemeName = () => {
+    const currentTheme = THEME_OPTIONS.find(opt => opt.value === themeMode);
+    return currentTheme ? t(currentTheme.labelKey) : t('profile.themeSystem');
   };
 
   const handleDeleteAccount = () => {
@@ -107,7 +126,7 @@ export default function ProfileScreen() {
     try {
       const updated = await checkHealthKitGoals();
       if (updated && updated.length > 0) {
-        const names = updated.map(h => `• ${h.name}`).join('\n');
+        const names = updated.map((h: any) => `• ${h.name}`).join('\n');
         Alert.alert(
           t('profile.healthCheckTitle'),
           t('profile.healthCheckSuccess', { habits: names })
@@ -134,6 +153,8 @@ export default function ProfileScreen() {
     return t('profile.daysAgo', { count: days });
   };
 
+  const styles = createStyles(colors);
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
@@ -144,7 +165,7 @@ export default function ProfileScreen() {
         {/* Аватар и имя */}
         <View style={styles.profileSection}>
           <View style={styles.avatar}>
-            <Icon name="user-3-fill" size={48} color={Colors.primary} />
+            <Icon name="user-3-fill" size={48} color={colors.primary} />
           </View>
           <Text style={styles.username}>{user?.fullName || user?.email || t('profile.user')}</Text>
           {user?.email && <Text style={styles.userEmail}>{user.email}</Text>}
@@ -154,12 +175,25 @@ export default function ProfileScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t('profile.settings')}</Text>
 
+          {/* Выбор темы */}
+          <TouchableOpacity
+            style={styles.settingItem}
+            onPress={() => setThemeModalVisible(true)}
+          >
+            <Icon name="palette-fill" size={24} color={colors.primary} style={{ marginRight: Sizes.spacing.md }} />
+            <View style={{ flex: 1 }}>
+              <Text style={styles.settingText}>{t('profile.theme')}</Text>
+              <Text style={styles.settingSubtext}>{getCurrentThemeName()}</Text>
+            </View>
+            <Text style={styles.settingArrow}>›</Text>
+          </TouchableOpacity>
+
           {/* Выбор языка */}
           <TouchableOpacity
             style={styles.settingItem}
             onPress={() => setLanguageModalVisible(true)}
           >
-            <Icon name="global-fill" size={24} color={Colors.primary} style={{ marginRight: Sizes.spacing.md }} />
+            <Icon name="global-fill" size={24} color={colors.primary} style={{ marginRight: Sizes.spacing.md }} />
             <View style={{ flex: 1 }}>
               <Text style={styles.settingText}>{t('profile.language')}</Text>
               <Text style={styles.settingSubtext}>{getCurrentLanguageName()}</Text>
@@ -174,7 +208,7 @@ export default function ProfileScreen() {
               onPress={handleSync}
               disabled={isSyncing}
             >
-              <Icon name="cloud-fill" size={24} color={Colors.primary} style={{ marginRight: Sizes.spacing.md }} />
+              <Icon name="cloud-fill" size={24} color={colors.primary} style={{ marginRight: Sizes.spacing.md }} />
               <View style={{ flex: 1 }}>
                 <Text style={styles.settingText}>{t('profile.syncWithICloud')}</Text>
                 <Text style={styles.settingSubtext}>
@@ -182,7 +216,7 @@ export default function ProfileScreen() {
                 </Text>
               </View>
               {isSyncing ? (
-                <ActivityIndicator size="small" color={Colors.primary} />
+                <ActivityIndicator size="small" color={colors.primary} />
               ) : (
                 <Text style={styles.settingArrow}>›</Text>
               )}
@@ -195,7 +229,7 @@ export default function ProfileScreen() {
               style={styles.settingItem}
               onPress={handleCheckHealthGoals}
             >
-              <Icon name="heart-pulse-fill" size={24} color={Colors.error} style={{ marginRight: Sizes.spacing.md }} />
+              <Icon name="heart-pulse-fill" size={24} color={colors.error} style={{ marginRight: Sizes.spacing.md }} />
               <View style={{ flex: 1 }}>
                 <Text style={styles.settingText}>{t('profile.health')}</Text>
                 <Text style={styles.settingSubtext}>
@@ -207,19 +241,19 @@ export default function ProfileScreen() {
           )}
 
           <TouchableOpacity style={styles.settingItem} onPress={handleAbout}>
-            <Icon name="information-fill" size={24} color={Colors.primary} style={{ marginRight: Sizes.spacing.md }} />
+            <Icon name="information-fill" size={24} color={colors.primary} style={{ marginRight: Sizes.spacing.md }} />
             <Text style={styles.settingText}>{t('profile.about')}</Text>
             <Text style={styles.settingArrow}>›</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.settingItem} onPress={handleDeleteAccount}>
-            <Icon name="delete-bin-fill" size={24} color={Colors.error} style={{ marginRight: Sizes.spacing.md }} />
+            <Icon name="delete-bin-fill" size={24} color={colors.error} style={{ marginRight: Sizes.spacing.md }} />
             <Text style={[styles.settingText, styles.settingTextDanger]}>{t('profile.deleteAccount')}</Text>
             <Text style={styles.settingArrow}>›</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.settingItem} onPress={handleSignOut}>
-            <Icon name="logout-box-r-fill" size={24} color={Colors.error} style={{ marginRight: Sizes.spacing.md }} />
+            <Icon name="logout-box-r-fill" size={24} color={colors.error} style={{ marginRight: Sizes.spacing.md }} />
             <Text style={[styles.settingText, styles.settingTextDanger]}>{t('profile.signOut')}</Text>
             <Text style={styles.settingArrow}>›</Text>
           </TouchableOpacity>
@@ -231,6 +265,57 @@ export default function ProfileScreen() {
           <Text style={styles.footerSubtext}>{t('profile.madeWithLove')}</Text>
         </View>
       </ScrollView>
+
+      {/* Theme Selection Modal */}
+      <Modal
+        visible={themeModalVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setThemeModalVisible(false)}
+      >
+        <Pressable
+          style={styles.modalOverlay}
+          onPress={() => setThemeModalVisible(false)}
+        >
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>{t('profile.selectTheme')}</Text>
+            {THEME_OPTIONS.map((option) => (
+              <TouchableOpacity
+                key={option.value}
+                style={[
+                  styles.themeOption,
+                  themeMode === option.value && styles.themeOptionSelected,
+                ]}
+                onPress={() => handleThemeChange(option.value)}
+              >
+                <Icon
+                  name={option.icon as IconName}
+                  size={24}
+                  color={themeMode === option.value ? colors.primary : colors.textSecondary}
+                  style={{ marginRight: Sizes.spacing.md }}
+                />
+                <Text
+                  style={[
+                    styles.themeOptionText,
+                    themeMode === option.value && styles.themeOptionTextSelected,
+                  ]}
+                >
+                  {t(option.labelKey)}
+                </Text>
+                {themeMode === option.value && (
+                  <Icon name="check-line" size={20} color={colors.primary} />
+                )}
+              </TouchableOpacity>
+            ))}
+            <TouchableOpacity
+              style={styles.modalCloseButton}
+              onPress={() => setThemeModalVisible(false)}
+            >
+              <Text style={styles.modalCloseButtonText}>{t('common.cancel')}</Text>
+            </TouchableOpacity>
+          </View>
+        </Pressable>
+      </Modal>
 
       {/* Language Selection Modal */}
       <Modal
@@ -263,7 +348,7 @@ export default function ProfileScreen() {
                   {lang.nativeName}
                 </Text>
                 {i18n.language === lang.code && (
-                  <Icon name="check-line" size={20} color={Colors.primary} />
+                  <Icon name="check-line" size={20} color={colors.primary} />
                 )}
               </TouchableOpacity>
             ))}
@@ -280,10 +365,10 @@ export default function ProfileScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ReturnType<typeof useThemeColors>) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background,
+    backgroundColor: colors.background,
   },
   header: {
     paddingHorizontal: Sizes.spacing.md,
@@ -292,7 +377,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: Sizes.fontSize.xxl,
     fontWeight: 'bold',
-    color: Colors.text,
+    color: colors.text,
   },
   content: {
     flex: 1,
@@ -305,7 +390,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: Colors.primary + '20',
+    backgroundColor: colors.primary + '20',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: Sizes.spacing.md,
@@ -313,11 +398,11 @@ const styles = StyleSheet.create({
   username: {
     fontSize: Sizes.fontSize.xl,
     fontWeight: 'bold',
-    color: Colors.text,
+    color: colors.text,
   },
   userEmail: {
     fontSize: Sizes.fontSize.md,
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
     marginTop: Sizes.spacing.xs,
   },
   section: {
@@ -326,13 +411,13 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: Sizes.fontSize.xl,
     fontWeight: 'bold',
-    color: Colors.text,
+    color: colors.text,
     marginBottom: Sizes.spacing.md,
   },
   settingItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.surface,
+    backgroundColor: colors.surface,
     padding: Sizes.spacing.md,
     borderRadius: Sizes.borderRadius.lg,
     marginBottom: Sizes.spacing.sm,
@@ -340,20 +425,20 @@ const styles = StyleSheet.create({
   settingText: {
     flex: 1,
     fontSize: Sizes.fontSize.lg,
-    color: Colors.text,
+    color: colors.text,
     fontWeight: '600',
   },
   settingTextDanger: {
-    color: Colors.error,
+    color: colors.error,
   },
   settingSubtext: {
     fontSize: Sizes.fontSize.sm,
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
     marginTop: Sizes.spacing.xs,
   },
   settingArrow: {
     fontSize: 24,
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
   },
   footer: {
     alignItems: 'center',
@@ -361,22 +446,22 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: Sizes.fontSize.md,
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
     marginBottom: Sizes.spacing.xs,
   },
   footerSubtext: {
     fontSize: Sizes.fontSize.sm,
-    color: Colors.textDisabled,
+    color: colors.textDisabled,
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: colors.overlay,
     justifyContent: 'center',
     alignItems: 'center',
     padding: Sizes.spacing.lg,
   },
   modalContent: {
-    backgroundColor: Colors.surface,
+    backgroundColor: colors.surface,
     borderRadius: Sizes.borderRadius.xl,
     padding: Sizes.spacing.lg,
     width: '100%',
@@ -385,9 +470,29 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: Sizes.fontSize.xl,
     fontWeight: 'bold',
-    color: Colors.text,
+    color: colors.text,
     textAlign: 'center',
     marginBottom: Sizes.spacing.lg,
+  },
+  themeOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: Sizes.spacing.md,
+    paddingHorizontal: Sizes.spacing.md,
+    borderRadius: Sizes.borderRadius.md,
+    marginBottom: Sizes.spacing.xs,
+  },
+  themeOptionSelected: {
+    backgroundColor: colors.primary + '15',
+  },
+  themeOptionText: {
+    flex: 1,
+    fontSize: Sizes.fontSize.lg,
+    color: colors.text,
+  },
+  themeOptionTextSelected: {
+    color: colors.primary,
+    fontWeight: '600',
   },
   languageOption: {
     flexDirection: 'row',
@@ -399,14 +504,14 @@ const styles = StyleSheet.create({
     marginBottom: Sizes.spacing.xs,
   },
   languageOptionSelected: {
-    backgroundColor: Colors.primary + '15',
+    backgroundColor: colors.primary + '15',
   },
   languageOptionText: {
     fontSize: Sizes.fontSize.lg,
-    color: Colors.text,
+    color: colors.text,
   },
   languageOptionTextSelected: {
-    color: Colors.primary,
+    color: colors.primary,
     fontWeight: '600',
   },
   modalCloseButton: {
@@ -416,7 +521,7 @@ const styles = StyleSheet.create({
   },
   modalCloseButtonText: {
     fontSize: Sizes.fontSize.md,
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
     fontWeight: '600',
   },
 });

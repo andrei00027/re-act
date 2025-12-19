@@ -1,7 +1,8 @@
 // src/components/common/Toast.tsx
 import React, { useEffect, useRef } from 'react';
 import { Text, StyleSheet, Animated } from 'react-native';
-import { Colors, Sizes } from '@/src/constants';
+import { Sizes } from '@/src/constants';
+import { useThemeColors } from '@/src/hooks/useThemeColors';
 
 interface ToastProps {
   message: string;
@@ -18,6 +19,7 @@ export const Toast: React.FC<ToastProps> = ({
   onHide,
   duration = 1000
 }) => {
+  const colors = useThemeColors();
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(-100)).current;
 
@@ -73,11 +75,11 @@ export const Toast: React.FC<ToastProps> = ({
   const getBackgroundColor = () => {
     switch (type) {
       case 'success':
-        return Colors.success;
+        return colors.success;
       case 'error':
-        return Colors.error;
+        return colors.error;
       default:
-        return Colors.primary;
+        return colors.primary;
     }
   };
 
@@ -124,14 +126,14 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 20,
-    color: Colors.surface,
+    color: '#FFFFFF',
     marginRight: Sizes.spacing.sm,
-    fontWeight: Sizes.fontWeight.bold,
+    fontWeight: 'bold',
   },
   message: {
     flex: 1,
     fontSize: Sizes.fontSize.lg,
-    fontWeight: Sizes.fontWeight.medium,
-    color: Colors.surface,
+    fontWeight: '500',
+    color: '#FFFFFF',
   },
 });

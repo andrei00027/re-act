@@ -2,7 +2,8 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { useTranslation } from 'react-i18next';
-import { Colors, Sizes } from '@/src/constants';
+import { Sizes } from '@/src/constants';
+import { useThemeColors } from '@/src/hooks/useThemeColors';
 import { useHabits } from '@/src/context/HabitsContext';
 import { useMemo } from 'react';
 import { tPlural } from '@/src/i18n';
@@ -98,6 +99,7 @@ LocaleConfig.locales['es'] = {
 
 export default function CalendarScreen() {
   const { t, i18n } = useTranslation();
+  const colors = useThemeColors();
   const { habits } = useHabits();
 
   // Set calendar locale based on current app language
@@ -108,21 +110,21 @@ export default function CalendarScreen() {
   const markedDates = useMemo(() => {
     const marked: any = {};
 
-    habits.forEach(habit => {
+    habits.forEach((habit: any) => {
       Object.keys(habit.completionHistory || {}).forEach(date => {
         if (habit.completionHistory[date].completed) {
           if (!marked[date]) {
             marked[date] = { dots: [] };
           }
           marked[date].dots.push({
-            color: Colors.success,
+            color: colors.success,
           });
         }
       });
     });
 
     return marked;
-  }, [habits]);
+  }, [habits, colors.success]);
 
   // Подсчитать статистику за последний месяц
   const monthStats = useMemo(() => {
@@ -132,7 +134,7 @@ export default function CalendarScreen() {
     let completedDays = 0;
     const checkedDates = new Set();
 
-    habits.forEach(habit => {
+    habits.forEach((habit: any) => {
       Object.keys(habit.completionHistory || {}).forEach(dateStr => {
         const date = new Date(dateStr);
         if (date >= thirtyDaysAgo && date <= today && habit.completionHistory[dateStr].completed) {
@@ -146,6 +148,8 @@ export default function CalendarScreen() {
 
     return completedDays;
   }, [habits]);
+
+  const styles = createStyles(colors);
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -161,32 +165,33 @@ export default function CalendarScreen() {
 
         <View style={styles.calendarContainer}>
           <Calendar
-            key={i18n.language}
+            key={`${i18n.language}-${colors.background}`}
             markedDates={markedDates}
             markingType="multi-dot"
             firstDay={1}
             theme={{
-              backgroundColor: Colors.background,
-              calendarBackground: Colors.surface,
-              textSectionTitleColor: Colors.textSecondary,
-              selectedDayBackgroundColor: Colors.primary,
-              selectedDayTextColor: Colors.surface,
-              todayTextColor: Colors.primary,
-              dayTextColor: Colors.text,
-              textDisabledColor: Colors.textDisabled,
-              dotColor: Colors.success,
-              monthTextColor: Colors.text,
+              backgroundColor: colors.background,
+              calendarBackground: colors.surface,
+              textSectionTitleColor: colors.textSecondary,
+              selectedDayBackgroundColor: colors.primary,
+              selectedDayTextColor: colors.surface,
+              todayTextColor: colors.primary,
+              dayTextColor: colors.text,
+              textDisabledColor: colors.textDisabled,
+              dotColor: colors.success,
+              monthTextColor: colors.text,
               textMonthFontWeight: 'bold',
               textMonthFontSize: Sizes.fontSize.xl,
               textDayFontSize: Sizes.fontSize.md,
               textDayHeaderFontSize: Sizes.fontSize.sm,
+              arrowColor: colors.primary,
             }}
           />
         </View>
 
         <View style={styles.legend}>
           <View style={styles.legendItem}>
-            <View style={[styles.legendDot, { backgroundColor: Colors.success }]} />
+            <View style={[styles.legendDot, { backgroundColor: colors.success }]} />
             <Text style={styles.legendText}>{t('calendar.completedHabit')}</Text>
           </View>
         </View>
@@ -195,10 +200,10 @@ export default function CalendarScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ReturnType<typeof useThemeColors>) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background,
+    backgroundColor: colors.background,
   },
   header: {
     paddingHorizontal: Sizes.spacing.md,
@@ -207,13 +212,13 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: Sizes.fontSize.xxl,
     fontWeight: 'bold',
-    color: Colors.text,
+    color: colors.text,
   },
   content: {
     flex: 1,
   },
   statsCard: {
-    backgroundColor: Colors.surface,
+    backgroundColor: colors.surface,
     margin: Sizes.spacing.md,
     padding: Sizes.spacing.lg,
     borderRadius: Sizes.borderRadius.lg,
@@ -221,16 +226,16 @@ const styles = StyleSheet.create({
   },
   statsLabel: {
     fontSize: Sizes.fontSize.md,
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
     marginBottom: Sizes.spacing.xs,
   },
   statsValue: {
     fontSize: Sizes.fontSize.xxxl,
     fontWeight: 'bold',
-    color: Colors.primary,
+    color: colors.primary,
   },
   calendarContainer: {
-    backgroundColor: Colors.surface,
+    backgroundColor: colors.surface,
     margin: Sizes.spacing.md,
     borderRadius: Sizes.borderRadius.lg,
     padding: Sizes.spacing.sm,
@@ -239,7 +244,7 @@ const styles = StyleSheet.create({
   legend: {
     margin: Sizes.spacing.md,
     padding: Sizes.spacing.md,
-    backgroundColor: Colors.surface,
+    backgroundColor: colors.surface,
     borderRadius: Sizes.borderRadius.lg,
   },
   legendItem: {
@@ -254,6 +259,6 @@ const styles = StyleSheet.create({
   },
   legendText: {
     fontSize: Sizes.fontSize.md,
-    color: Colors.text,
+    color: colors.text,
   },
 });

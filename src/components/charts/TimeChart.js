@@ -1,14 +1,11 @@
 // src/components/charts/TimeChart.js
 import React, { useMemo } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useTranslation } from 'react-i18next';
-import { Colors } from '@/src/constants/Colors';
+import { View, StyleSheet } from 'react-native';
+import { useThemeColors } from '@/src/hooks/useThemeColors';
 import Svg, { Path, Circle, Text as SvgText } from 'react-native-svg';
 
-const CHART_COLOR = Colors.primary;
-
 const TimeChart = ({ completionHistory }) => {
-  const { t } = useTranslation();
+  const colors = useThemeColors();
 
   const chartData = useMemo(() => {
     if (!completionHistory || Object.keys(completionHistory).length === 0) {
@@ -85,7 +82,7 @@ const TimeChart = ({ completionHistory }) => {
         <Path
           d={createPath()}
           fill="none"
-          stroke={CHART_COLOR}
+          stroke={colors.primary}
           strokeWidth={2}
         />
         {peakHours.map((peak, index) => {
@@ -97,7 +94,7 @@ const TimeChart = ({ completionHistory }) => {
               cx={x}
               cy={y}
               r={3}
-              fill={CHART_COLOR}
+              fill={colors.primary}
             />
           );
         })}
@@ -106,7 +103,7 @@ const TimeChart = ({ completionHistory }) => {
           x={padding + (6 / 23) * (chartWidth - 2 * padding)}
           y={chartHeight + 14}
           fontSize={10}
-          fill={Colors.textSecondary}
+          fill={colors.textSecondary}
           textAnchor="middle"
           fontWeight="700"
         >
@@ -116,7 +113,7 @@ const TimeChart = ({ completionHistory }) => {
           x={padding + (18 / 23) * (chartWidth - 2 * padding)}
           y={chartHeight + 14}
           fontSize={10}
-          fill={Colors.textSecondary}
+          fill={colors.textSecondary}
           textAnchor="middle"
           fontWeight="700"
         >

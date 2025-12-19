@@ -21,12 +21,14 @@ import { useTranslation } from 'react-i18next';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Icon from 'react-native-remix-icon';
 import * as Haptics from 'expo-haptics';
-import { Colors, Sizes } from '@/src/constants';
+import { Sizes } from '@/src/constants';
+import { useThemeColors } from '@/src/hooks/useThemeColors';
 import { HABIT_ICON_CATEGORIES } from '@/src/constants/HabitIcons';
 import { HabitIcon } from '@/src/components/common/HabitIcon';
 
 export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const colors = useThemeColors();
   const [name, setName] = useState('');
   const [selectedIcon, setSelectedIcon] = useState('checkbox-circle');
   const [selectedCategory, setSelectedCategory] = useState('health');
@@ -37,7 +39,6 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
   const [selectedDays, setSelectedDays] = useState([1, 2, 3, 4, 5, 6, 0]);
   const [isQuitHabit, setIsQuitHabit] = useState(false);
 
-  // Анимация выезда карточки
   const slideAnim = useRef(new Animated.Value(SCREEN_HEIGHT)).current;
 
   useEffect(() => {
@@ -63,14 +64,12 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
     { id: 0, short: t('days.sun'), full: t('days.sunday') },
   ];
 
-  // Обновить форму при изменении habit
   useEffect(() => {
     if (habit) {
       setName(habit.name || '');
       const iconId = habit.icon || 'checkbox-circle';
       setSelectedIcon(iconId);
 
-      // Найти категорию, к которой принадлежит текущая иконка
       const category = HABIT_ICON_CATEGORIES.find(cat =>
         cat.icons.some(icon => icon.id === iconId)
       );
@@ -83,11 +82,8 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
         setReminderTime(new Date(habit.reminderTime));
       }
 
-      // Загрузить настройки дней недели
       setEveryDay(habit.everyDay !== undefined ? habit.everyDay : true);
       setSelectedDays(habit.selectedDays || [1, 2, 3, 4, 5, 6, 0]);
-
-      // Загрузить режим отказа
       setIsQuitHabit(habit.isQuitHabit || false);
     }
   }, [habit]);
@@ -158,6 +154,8 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
     return `${hours}:${minutes}`;
   };
 
+  const styles = createStyles(colors);
+
   return (
     <Modal
       visible={visible}
@@ -180,7 +178,7 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
                       style={styles.deleteButton}
                       onPress={handleDelete}
                     >
-                      <Icon name="delete-bin-line" size={24} color={Colors.error} />
+                      <Icon name="delete-bin-line" size={24} color={colors.error} />
                     </TouchableOpacity>
                   )}
                 </View>
@@ -196,13 +194,12 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
                     value={name}
                     onChangeText={setName}
                     placeholder={t('habits.namePlaceholder')}
-                    placeholderTextColor={Colors.textDisabled}
+                    placeholderTextColor={colors.textDisabled}
                     autoFocus
                   />
 
                   <Text style={styles.label}>{t('habits.selectIcon')}</Text>
 
-                  {/* Category Tabs */}
                   <ScrollView
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -228,7 +225,6 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
                     ))}
                   </ScrollView>
 
-                  {/* Icon Grid */}
                   <View style={styles.iconGrid}>
                     {(HABIT_ICON_CATEGORIES.find(cat => cat.id === selectedCategory)?.icons || []).map((icon) => (
                       <TouchableOpacity
@@ -242,13 +238,12 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
                         <HabitIcon
                           name={icon.id}
                           size={28}
-                          color={selectedIcon === icon.id ? Colors.primary : Colors.text}
+                          color={selectedIcon === icon.id ? colors.primary : colors.text}
                         />
                       </TouchableOpacity>
                     ))}
                   </View>
 
-                  {/* Частота выполнения */}
                   <View style={styles.frequencySection}>
                     <TouchableOpacity
                       style={styles.frequencyHeader}
@@ -259,8 +254,8 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
                       <Switch
                         value={everyDay}
                         onValueChange={handleEveryDayToggle}
-                        trackColor={{ false: Colors.border, true: Colors.primary + '80' }}
-                        thumbColor={everyDay ? Colors.primary : Colors.textDisabled}
+                        trackColor={{ false: colors.border, true: colors.primary + '80' }}
+                        thumbColor={everyDay ? colors.primary : colors.textDisabled}
                       />
                     </TouchableOpacity>
 
@@ -289,7 +284,6 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
                     )}
                   </View>
 
-                  {/* Режим отказа от привычки */}
                   <View style={styles.quitHabitSection}>
                     <TouchableOpacity
                       style={styles.quitHabitHeader}
@@ -311,13 +305,12 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
                           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                           setIsQuitHabit(value);
                         }}
-                        trackColor={{ false: Colors.border, true: Colors.error + '80' }}
-                        thumbColor={isQuitHabit ? Colors.error : Colors.textDisabled}
+                        trackColor={{ false: colors.border, true: colors.error + '80' }}
+                        thumbColor={isQuitHabit ? colors.error : colors.textDisabled}
                       />
                     </TouchableOpacity>
                   </View>
 
-                  {/* Настройки напоминаний */}
                   <View style={styles.reminderSection}>
                     <TouchableOpacity
                       style={styles.reminderHeader}
@@ -334,8 +327,8 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
                           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                           setReminderEnabled(value);
                         }}
-                        trackColor={{ false: Colors.border, true: Colors.primary + '80' }}
-                        thumbColor={reminderEnabled ? Colors.primary : Colors.textDisabled}
+                        trackColor={{ false: colors.border, true: colors.primary + '80' }}
+                        thumbColor={reminderEnabled ? colors.primary : colors.textDisabled}
                       />
                     </TouchableOpacity>
 
@@ -344,7 +337,7 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
                         style={styles.timeButton}
                         onPress={() => setShowTimePicker(true)}
                       >
-                        <Icon name="alarm-line" size={24} color={Colors.primary} />
+                        <Icon name="alarm-line" size={24} color={colors.primary} />
                         <Text style={styles.timeButtonText}>{formatTime(reminderTime)}</Text>
                       </TouchableOpacity>
                     )}
@@ -386,17 +379,17 @@ export const EditHabitModal = ({ visible, onClose, onSubmit, onDelete, habit }) 
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors) => StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(57, 73, 171, 0.4)',
+    backgroundColor: colors.overlay,
     justifyContent: 'flex-end',
   },
   keyboardView: {
     justifyContent: 'flex-end',
   },
   modal: {
-    backgroundColor: Colors.surface,
+    backgroundColor: colors.surface,
     borderTopLeftRadius: Sizes.borderRadius.xl,
     borderTopRightRadius: Sizes.borderRadius.xl,
     padding: Sizes.spacing.lg,
@@ -412,7 +405,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: Sizes.fontSize.xxl,
     fontWeight: 'bold',
-    color: Colors.text,
+    color: colors.text,
   },
   scrollContent: {
     flexGrow: 1,
@@ -427,15 +420,15 @@ const styles = StyleSheet.create({
   label: {
     fontSize: Sizes.fontSize.md,
     fontWeight: '600',
-    color: Colors.text,
+    color: colors.text,
     marginBottom: Sizes.spacing.sm,
   },
   input: {
-    backgroundColor: Colors.background,
+    backgroundColor: colors.surfaceSecondary,
     borderRadius: Sizes.borderRadius.md,
     padding: Sizes.spacing.md,
     fontSize: Sizes.fontSize.lg,
-    color: Colors.text,
+    color: colors.text,
     marginBottom: Sizes.spacing.lg,
   },
   categoryScroll: {
@@ -450,21 +443,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: Sizes.spacing.md,
     paddingVertical: Sizes.spacing.sm,
     borderRadius: Sizes.borderRadius.full,
-    backgroundColor: Colors.background,
+    backgroundColor: colors.surfaceSecondary,
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: colors.border,
   },
   categoryTabSelected: {
-    backgroundColor: Colors.primary,
-    borderColor: Colors.primary,
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
   },
   categoryTabText: {
     fontSize: Sizes.fontSize.sm,
     fontWeight: Sizes.fontWeight.medium,
-    color: Colors.text,
+    color: colors.text,
   },
   categoryTabTextSelected: {
-    color: Colors.surface,
+    color: colors.primaryForeground,
     fontWeight: Sizes.fontWeight.semibold,
   },
   iconGrid: {
@@ -478,7 +471,7 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: Sizes.borderRadius.md,
-    backgroundColor: Colors.background,
+    backgroundColor: colors.surfaceSecondary,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,
@@ -486,8 +479,8 @@ const styles = StyleSheet.create({
     ...Sizes.shadow.sm,
   },
   iconButtonSelected: {
-    borderColor: Colors.primary,
-    backgroundColor: '#E8EAF6',
+    borderColor: colors.primary,
+    backgroundColor: colors.primary + '20',
     ...Sizes.shadow.md,
   },
   buttons: {
@@ -501,20 +494,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonCancel: {
-    backgroundColor: Colors.background,
+    backgroundColor: colors.surfaceSecondary,
   },
   buttonSubmit: {
-    backgroundColor: Colors.primary,
+    backgroundColor: colors.primary,
   },
   buttonTextCancel: {
     fontSize: Sizes.fontSize.lg,
     fontWeight: '600',
-    color: Colors.text,
+    color: colors.text,
   },
   buttonTextSubmit: {
     fontSize: Sizes.fontSize.lg,
     fontWeight: '600',
-    color: Colors.surface,
+    color: colors.primaryForeground,
   },
   frequencySection: {
     marginBottom: Sizes.spacing.lg,
@@ -533,23 +526,23 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: Colors.background,
+    backgroundColor: colors.surfaceSecondary,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,
-    borderColor: Colors.border,
+    borderColor: colors.border,
   },
   dayButtonSelected: {
-    backgroundColor: Colors.primary,
-    borderColor: Colors.primary,
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
   },
   dayButtonText: {
     fontSize: Sizes.fontSize.sm,
     fontWeight: Sizes.fontWeight.semibold,
-    color: Colors.text,
+    color: colors.text,
   },
   dayButtonTextSelected: {
-    color: Colors.surface,
+    color: colors.primaryForeground,
   },
   quitHabitSection: {
     marginBottom: Sizes.spacing.lg,
@@ -565,7 +558,7 @@ const styles = StyleSheet.create({
   },
   quitHabitDescription: {
     fontSize: Sizes.fontSize.sm,
-    color: Colors.textSecondary,
+    color: colors.textSecondary,
     marginTop: 2,
   },
   reminderSection: {
@@ -580,7 +573,7 @@ const styles = StyleSheet.create({
   timeButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.background,
+    backgroundColor: colors.surfaceSecondary,
     borderRadius: Sizes.borderRadius.md,
     padding: Sizes.spacing.md,
     gap: Sizes.spacing.md,
@@ -588,6 +581,6 @@ const styles = StyleSheet.create({
   timeButtonText: {
     fontSize: Sizes.fontSize.xl,
     fontWeight: '600',
-    color: Colors.text,
+    color: colors.text,
   },
 });
