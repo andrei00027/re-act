@@ -107,7 +107,12 @@
     "activeDaysMonth": "Días activos este mes",
     "days_one": "{{count}} día",
     "days_other": "{{count}} días",
-    "completedHabit": "Hábito completado"
+    "completedHabit": "Hábito completado",
+    "completionLevel": "Nivel de cumplimiento",
+    "today": "Hoy",
+    "allCompleted": "Todo hecho",
+    "partiallyCompleted": "Parcial",
+    "noneCompleted": "Nada"
   },
   "profile": {
     "title": "Perfil",
@@ -136,7 +141,7 @@
     "deleteAccount": "Eliminar Cuenta",
     "deleteAccountConfirm": "Esto eliminará tu cuenta y todos los datos. Tendrás que iniciar sesión de nuevo con Apple ID.",
     "about": "Acerca de",
-    "aboutMessage": "Versión: 1.0.0\n\nAplicación de seguimiento de hábitos para alcanzar tus metas.\n\n© 2024 MomentumFlow",
+    "aboutMessage": "Versión: 1.0.0\n\nAplicación de seguimiento de hábitos para alcanzar tus metas.\n\n© 2025 Re:Act",
     "ok": "OK",
     "user": "Usuario",
     "syncWithICloud": "Sincronizar con iCloud",
@@ -157,10 +162,10 @@
     "daysAgo": "hace {{count}} d",
     "never": "Nunca",
     "madeWithLove": "Hecho con ❤️ para tus hábitos",
-    "version": "MomentumFlow v1.0.0"
+    "version": "Re:Act v1.0.0"
   },
   "auth": {
-    "welcome": "Bienvenido a MomentumFlow",
+    "welcome": "Bienvenido a Re:Act",
     "subtitle": "Construye hábitos que perduran",
     "signInWithApple": "Iniciar sesión con Apple",
     "signInError": "Error al iniciar sesión. Por favor, inténtalo de nuevo.",

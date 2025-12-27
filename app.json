@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "MomentumFlow",
-    "slug": "MomentumFlow",
+    "name": "Re:Act",
+    "slug": "react",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "momentumflow",
+    "scheme": "react",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.andrej.momentumflow",
+      "bundleIdentifier": "com.re.act",
       "usesIcloudStorage": true,
       "entitlements": {
         "com.apple.developer.applesignin": ["Default"],
@@ -27,12 +27,12 @@
         "NSUbiquitousContainers": {
           "iCloud.$(CFBundleIdentifier)": {
             "NSUbiquitousContainerIsDocumentScopePublic": true,
-            "NSUbiquitousContainerName": "MomentumFlow",
+            "NSUbiquitousContainerName": "Re:Act",
             "NSUbiquitousContainerSupportedFolderLevels": "Any"
           }
         },
-        "NSHealthShareUsageDescription": "MomentumFlow нужен доступ к вашим данным здоровья, чтобы автоматически отмечать выполнение привычек (тренировки, шаги, сон).",
-        "NSHealthUpdateUsageDescription": "MomentumFlow нужен доступ для записи данных о ваших привычках в Apple Health."
+        "NSHealthShareUsageDescription": "Re:Act нужен доступ к вашим данным здоровья, чтобы автоматически отмечать выполнение привычек (тренировки, шаги, сон).",
+        "NSHealthUpdateUsageDescription": "Re:Act нужен доступ для записи данных о ваших привычках в Apple Health."
       }
     },
     "android": {
@@ -44,7 +44,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.andrej.momentumflow"
+      "package": "com.re.act"
     },
     "web": {
       "output": "static",

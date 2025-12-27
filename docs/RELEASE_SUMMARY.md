@@ -1,4 +1,4 @@
-# MomentumFlow v1.0 - Release Summary
+# Re:Act v1.0 - Release Summary
 
 ## 🎉 Project Status: Ready for App Store Submission
 
@@ -110,7 +110,7 @@
 
 **Documentation Ready:**
 - ✅ App Store listing (Russian + English)
-  - App name: "MomentumFlow - Habit Tracker"
+  - App name: "Re:Act - Habit Tracker"
   - Subtitle: "Flexible Streaks, Motivation"
   - Full descriptions (both languages)
   - Keywords for SEO
@@ -163,7 +163,7 @@
 ## 📁 Project Structure
 
 ```
-MomentumFlow/
+Re:Act/
 ├── app/                          # Expo Router screens
 │   ├── (tabs)/                  # Tab navigation
 │   │   ├── index.tsx           # Home (habits list)

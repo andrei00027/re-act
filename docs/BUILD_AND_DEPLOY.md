@@ -1,6 +1,6 @@
 # Build and Deploy Guide
 
-Complete guide for building and deploying MomentumFlow to the App Store.
+Complete guide for building and deploying Re:Act to the App Store.
 
 ## Prerequisites
 
@@ -42,8 +42,8 @@ open scripts/generate-android-icons.html
 #### 1.2 Update app.json
 ```bash
 # Edit app.json and update:
-# - name: "MomentumFlow"
-# - bundleIdentifier: "com.yourname.MomentumFlow" (change from anonymous)
+# - name: "Re:Act"
+# - bundleIdentifier: "com.yourname.Re:Act" (change from anonymous)
 # - version: "1.0.0"
 ```
 
@@ -118,10 +118,10 @@ This creates `eas.json` config file.
 {
   "expo": {
     "ios": {
-      "bundleIdentifier": "com.yourcompany.momentumflow"
+      "bundleIdentifier": "com.yourcompany.react"
     },
     "android": {
-      "package": "com.yourcompany.momentumflow"
+      "package": "com.yourcompany.react"
     }
   }
 }
@@ -137,8 +137,8 @@ This creates `eas.json` config file.
 3. Identifiers > + (Add)
 4. Select "App IDs" > Continue
 5. Type: App
-6. Description: MomentumFlow
-7. Bundle ID: `com.yourcompany.momentumflow`
+6. Description: Re:Act
+7. Bundle ID: `com.yourcompany.react`
 8. Capabilities:
    - ✅ Sign in with Apple
    - ✅ iCloud (CloudKit)
@@ -178,7 +178,7 @@ eas build --platform ios --profile production
 eas build:list
 
 # Or visit:
-# https://expo.dev/accounts/[your-account]/projects/momentumflow/builds
+# https://expo.dev/accounts/[your-account]/projects/react/builds
 ```
 
 #### 4.3 Download Build (Optional)
@@ -196,15 +196,15 @@ eas build:download --platform ios --latest
 2. My Apps > + > New App
 3. Fill in:
    - Platform: iOS
-   - Name: MomentumFlow
+   - Name: Re:Act
    - Primary Language: English (U.S.)
    - Bundle ID: Select your bundle ID
-   - SKU: momentumflow-1.0.0
+   - SKU: react-1.0.0
    - User Access: Full Access
 
 #### 5.2 Fill App Information
 **General Information:**
-- Name: MomentumFlow - Habit Tracker
+- Name: Re:Act - Habit Tracker
 - Subtitle: Flexible Streaks, Motivation
 - Category: Health & Fitness
 - Secondary Category: Productivity
@@ -294,7 +294,7 @@ Before submitting to App Store, test via TestFlight:
 ```
 
 1. Open TestFlight app on iOS
-2. Install MomentumFlow
+2. Install Re:Act
 3. Test all features
 4. Get feedback from team (if any)
 

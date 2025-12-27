@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, ViewStyle } from 'react-native';
+import { View, StyleSheet, ViewStyle } from 'react-native';
 import Icon, { IconName } from 'react-native-remix-icon';
 import { Colors } from '../../constants/Colors';
 
@@ -18,29 +18,15 @@ export const HabitIcon: React.FC<Props> = ({
   backgroundColor,
   containerSize,
 }) => {
-  // Check if it's an emoji (non-ASCII characters)
+  // Check if it's an emoji (non-ASCII characters) - use default icon instead
   const isEmoji = /[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/u.test(name);
 
-  if (isEmoji) {
-    // Render emoji
-    const emojiContainerStyle: ViewStyle[] = [styles.container];
-    if (backgroundColor) {
-      emojiContainerStyle.push({ backgroundColor });
-    }
-    if (containerSize) {
-      emojiContainerStyle.push({ width: containerSize, height: containerSize });
-    }
-
-    return (
-      <View style={emojiContainerStyle}>
-        <Text style={{ fontSize: size }}>{name}</Text>
-      </View>
-    );
-  }
+  // Use default icon if emoji or empty
+  const iconId = isEmoji || !name ? 'checkbox-circle' : name;
 
   // Render Remix Icon
   // Convert icon ID to remix icon name format (e.g., 'heart-pulse' -> 'heart-pulse-fill')
-  const iconName = (name.endsWith('-fill') || name.endsWith('-line') ? name : `${name}-fill`) as IconName;
+  const iconName = (iconId.endsWith('-fill') || iconId.endsWith('-line') ? iconId : `${iconId}-fill`) as IconName;
 
   const iconContainerStyle: ViewStyle[] = [styles.container];
   if (backgroundColor) {

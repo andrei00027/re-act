@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**MomentumFlow** is a next-generation habit tracker mobile app built with React Native and Expo. The app focuses on flexibility and motivation, using a "flexible streaks" system that doesn't punish users for missed days.
+**Re:Act** is a next-generation habit tracker mobile app built with React Native and Expo. The app focuses on flexibility and motivation, using a "flexible streaks" system that doesn't punish users for missed days.
 
 **Target Platform:** iOS (primary), Android (secondary)
 **Tech Stack:** React Native, Expo

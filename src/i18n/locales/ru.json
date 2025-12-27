@@ -116,7 +116,12 @@
     "days_few": "{{count}} дня",
     "days_many": "{{count}} дней",
     "days_other": "{{count}} дней",
-    "completedHabit": "Выполненная привычка"
+    "completedHabit": "Выполненная привычка",
+    "completionLevel": "Уровень выполнения",
+    "today": "Сегодня",
+    "allCompleted": "Всё выполнено",
+    "partiallyCompleted": "Частично",
+    "noneCompleted": "Не выполнено"
   },
   "profile": {
     "title": "Профиль",
@@ -150,7 +155,7 @@
     "deleteAccount": "Удалить аккаунт",
     "deleteAccountConfirm": "Это действие удалит ваш аккаунт и все данные. Вам потребуется войти снова через Apple ID.",
     "about": "О приложении",
-    "aboutMessage": "Версия: 1.0.0\n\nПриложение для отслеживания привычек и достижения целей.\n\n© 2024 MomentumFlow",
+    "aboutMessage": "Версия: 1.0.0\n\nПриложение для отслеживания привычек и достижения целей.\n\n© 2025 Re:Act",
     "ok": "ОК",
     "user": "Пользователь",
     "syncWithICloud": "Синхронизация с iCloud",
@@ -171,10 +176,10 @@
     "daysAgo": "{{count}} д назад",
     "never": "Никогда",
     "madeWithLove": "Сделано с ❤️ для ваших привычек",
-    "version": "MomentumFlow v1.0.0"
+    "version": "Re:Act v1.0.0"
   },
   "auth": {
-    "welcome": "Добро пожаловать в MomentumFlow",
+    "welcome": "Добро пожаловать в Re:Act",
     "subtitle": "Создавайте привычки, которые останутся с вами",
     "signInWithApple": "Войти через Apple",
     "signInWithGoogle": "Войти через Google",

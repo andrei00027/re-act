@@ -73,7 +73,7 @@ export default function ProfileScreen() {
 
   const handleAbout = () => {
     Alert.alert(
-      'MomentumFlow',
+      'Re:Act',
       t('profile.aboutMessage'),
       [{ text: t('profile.ok') }]
     );

@@ -16,7 +16,16 @@ import {
   Dimensions,
 } from 'react-native';
 
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
+// Calculate icon size: 5 icons per row with gaps
+// Works for all iPhones from iPhone 8 (375px) to iPhone 15 Pro Max (430px)
+const ICONS_PER_ROW = 5;
+const ICON_GAP = 6;
+const MODAL_HORIZONTAL_PADDING = 48; // Sizes.spacing.lg * 2
+const AVAILABLE_WIDTH = SCREEN_WIDTH - MODAL_HORIZONTAL_PADDING;
+const TOTAL_GAP_WIDTH = ICON_GAP * (ICONS_PER_ROW - 1);
+// Subtract 2px safety buffer to ensure icons fit on all devices
+const ICON_SIZE = Math.floor((AVAILABLE_WIDTH - TOTAL_GAP_WIDTH - 2) / ICONS_PER_ROW);
 import { useTranslation } from 'react-i18next';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Icon from 'react-native-remix-icon';
@@ -434,13 +443,12 @@ const createStyles = (colors) => StyleSheet.create({
   iconGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    gap: ICON_GAP,
     marginBottom: Sizes.spacing.xl,
-    gap: Sizes.spacing.sm,
   },
   iconButton: {
-    width: 56,
-    height: 56,
+    width: ICON_SIZE,
+    height: ICON_SIZE,
     borderRadius: Sizes.borderRadius.md,
     backgroundColor: colors.surfaceSecondary,
     alignItems: 'center',

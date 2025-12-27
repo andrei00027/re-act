@@ -112,7 +112,12 @@
     "activeDaysMonth": "Active days this month",
     "days_one": "{{count}} day",
     "days_other": "{{count}} days",
-    "completedHabit": "Completed habit"
+    "completedHabit": "Completed habit",
+    "completionLevel": "Completion level",
+    "today": "Today",
+    "allCompleted": "All done",
+    "partiallyCompleted": "Partial",
+    "noneCompleted": "None"
   },
   "profile": {
     "title": "Profile",
@@ -146,7 +151,7 @@
     "deleteAccount": "Delete Account",
     "deleteAccountConfirm": "This will delete your account and all data. You will need to sign in again with Apple ID.",
     "about": "About",
-    "aboutMessage": "Version: 1.0.0\n\nHabit tracking app to achieve your goals.\n\n© 2024 MomentumFlow",
+    "aboutMessage": "Version: 1.0.0\n\nHabit tracking app to achieve your goals.\n\n© 2025 Re:Act",
     "ok": "OK",
     "user": "User",
     "syncWithICloud": "Sync with iCloud",
@@ -167,10 +172,10 @@
     "daysAgo": "{{count}} d ago",
     "never": "Never",
     "madeWithLove": "Made with ❤️ for your habits",
-    "version": "MomentumFlow v1.0.0"
+    "version": "Re:Act v1.0.0"
   },
   "auth": {
-    "welcome": "Welcome to MomentumFlow",
+    "welcome": "Welcome to Re:Act",
     "subtitle": "Build habits that last",
     "signInWithApple": "Sign in with Apple",
     "signInWithGoogle": "Sign in with Google",

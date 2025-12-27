@@ -7,8 +7,8 @@ import { AsyncStorageService } from '../services/storage/AsyncStorageService';
 
 const AuthContext = createContext();
 
-const USER_KEY = 'momentumflow_user';
-const USERS_DB_KEY = 'momentumflow_users_db'; // Для email/password
+const USER_KEY = 'react_user';
+const USERS_DB_KEY = 'react_users_db'; // Для email/password
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
         console.log('🔧 Using mock authentication for iOS Simulator');
         const mockUserData = {
           id: 'mock-user-simulator',
-          email: 'developer@momentumflow.app',
+          email: 'hi@architeq.io',
           fullName: 'Dev User (Simulator)',
           authProvider: 'apple',
           authToken: 'mock-token-' + Date.now(),

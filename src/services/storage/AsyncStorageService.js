@@ -1,7 +1,7 @@
 // src/services/storage/AsyncStorageService.js
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const HABITS_KEY = '@MomentumFlow:habits';
+const HABITS_KEY = '@ReAct:habits';
 
 export const AsyncStorageService = {
   // Сохранить привычки

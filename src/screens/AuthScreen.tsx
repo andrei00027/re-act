@@ -11,6 +11,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as AppleAuthentication from 'expo-apple-authentication';
@@ -25,7 +26,7 @@ type AuthMode = 'main' | 'email-signin' | 'email-signup';
 
 export default function AuthScreen() {
   const colors = useThemeColors();
-  const { isDark } = useTheme();
+  useTheme(); // Keep hook for potential future use
   const { t } = useTranslation();
   const { signInWithApple, signInWithEmail, signUpWithEmail } = useAuth();
 
@@ -292,83 +293,91 @@ export default function AuthScreen() {
 
   // Main Auth Screen
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <View style={styles.header}>
-          <Text style={styles.logo}>📈</Text>
-          <Text style={styles.title}>MomentumFlow</Text>
-          <Text style={styles.subtitle}>{t('auth.subtitle')}</Text>
-        </View>
-
-        <View style={styles.features}>
-          <View style={styles.feature}>
-            <Text style={styles.featureIcon}>✨</Text>
-            <Text style={styles.featureText}>{t('auth.feature1')}</Text>
-          </View>
-          <View style={styles.feature}>
-            <Text style={styles.featureIcon}>📊</Text>
-            <Text style={styles.featureText}>{t('auth.feature2')}</Text>
-          </View>
-          <View style={styles.feature}>
-            <Text style={styles.featureIcon}>🔥</Text>
-            <Text style={styles.featureText}>{t('auth.feature3')}</Text>
-          </View>
-        </View>
-
-        <View style={styles.authButtons}>
-          {/* Apple Sign In */}
-          {Platform.OS === 'ios' && (
-            <AppleAuthentication.AppleAuthenticationButton
-              buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
-              buttonStyle={
-                isDark
-                  ? AppleAuthentication.AppleAuthenticationButtonStyle.WHITE
-                  : AppleAuthentication.AppleAuthenticationButtonStyle.BLACK
-              }
-              cornerRadius={Sizes.borderRadius.md}
-              style={styles.appleButton}
-              onPress={handleAppleSignIn}
+    <View style={styles.gradientBackground}>
+      <SafeAreaView style={styles.containerTransparent}>
+        <View style={styles.content}>
+          <View style={styles.header}>
+            <Image
+              source={require('@/assets/images/splash-icon.png')}
+              style={styles.logoImage}
+              resizeMode="contain"
             />
+            <Text style={styles.titleWhite}>Re:Act</Text>
+            <Text style={styles.subtitleWhite}>{t('auth.subtitle')}</Text>
+          </View>
+
+          <View style={styles.features}>
+            <View style={styles.feature}>
+              <View style={styles.featureIconContainer}>
+                <Ionicons name="sparkles" size={24} color="#fff" />
+              </View>
+              <Text style={styles.featureTextWhite}>{t('auth.feature1')}</Text>
+            </View>
+            <View style={styles.feature}>
+              <View style={styles.featureIconContainer}>
+                <Ionicons name="bar-chart" size={24} color="#fff" />
+              </View>
+              <Text style={styles.featureTextWhite}>{t('auth.feature2')}</Text>
+            </View>
+            <View style={styles.feature}>
+              <View style={styles.featureIconContainer}>
+                <Ionicons name="flame" size={24} color="#fff" />
+              </View>
+              <Text style={styles.featureTextWhite}>{t('auth.feature3')}</Text>
+            </View>
+          </View>
+
+          <View style={styles.authButtons}>
+            {/* Apple Sign In */}
+            {Platform.OS === 'ios' && (
+              <AppleAuthentication.AppleAuthenticationButton
+                buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+                buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
+                cornerRadius={Sizes.borderRadius.md}
+                style={styles.appleButton}
+                onPress={handleAppleSignIn}
+              />
+            )}
+
+            {/* Divider */}
+            <View style={styles.divider}>
+              <View style={styles.dividerLineWhite} />
+              <Text style={styles.dividerTextWhite}>{t('auth.or')}</Text>
+              <View style={styles.dividerLineWhite} />
+            </View>
+
+            {/* Email Sign In */}
+            <TouchableOpacity
+              style={styles.emailButtonWhite}
+              onPress={() => setAuthMode('email-signin')}
+            >
+              <Ionicons name="mail-outline" size={20} color="#3949AB" style={styles.emailIcon} />
+              <Text style={styles.emailButtonTextBlue}>{t('auth.signInWithEmail')}</Text>
+            </TouchableOpacity>
+
+            {/* Create Account Link */}
+            <TouchableOpacity
+              style={styles.createAccountButton}
+              onPress={() => setAuthMode('email-signup')}
+            >
+              <Text style={styles.createAccountTextWhite}>
+                {t('auth.noAccount')} <Text style={styles.createAccountLinkWhite}>{t('auth.signUp')}</Text>
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {!isAppleAvailable && Platform.OS === 'ios' && (
+            <View style={styles.devBadgeWhite}>
+              <Text style={styles.devBadgeTextWhite}>
+                {t('auth.devMode')}
+              </Text>
+            </View>
           )}
 
-          {/* Divider */}
-          <View style={styles.divider}>
-            <View style={styles.dividerLine} />
-            <Text style={styles.dividerText}>{t('auth.or')}</Text>
-            <View style={styles.dividerLine} />
-          </View>
-
-          {/* Email Sign In */}
-          <TouchableOpacity
-            style={styles.emailButton}
-            onPress={() => setAuthMode('email-signin')}
-          >
-            <Ionicons name="mail-outline" size={20} color={colors.primary} style={styles.emailIcon} />
-            <Text style={styles.emailButtonText}>{t('auth.signInWithEmail')}</Text>
-          </TouchableOpacity>
-
-          {/* Create Account Link */}
-          <TouchableOpacity
-            style={styles.createAccountButton}
-            onPress={() => setAuthMode('email-signup')}
-          >
-            <Text style={styles.createAccountText}>
-              {t('auth.noAccount')} <Text style={styles.createAccountLink}>{t('auth.signUp')}</Text>
-            </Text>
-          </TouchableOpacity>
+          <Text style={styles.footerWhite}>{t('auth.terms')}</Text>
         </View>
-
-        {!isAppleAvailable && Platform.OS === 'ios' && (
-          <View style={styles.devBadge}>
-            <Text style={styles.devBadgeText}>
-              🔧 {t('auth.devMode')}
-            </Text>
-          </View>
-        )}
-
-        <Text style={styles.footer}>{t('auth.terms')}</Text>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </View>
   );
 }
 
@@ -402,7 +411,8 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
     },
     header: {
       alignItems: 'center',
-      marginBottom: Sizes.spacing.xxl * 2,
+      marginTop: Sizes.spacing.xxl,
+      marginBottom: Sizes.spacing.xxl,
     },
     logo: {
       fontSize: 80,
@@ -575,5 +585,97 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
     linkTextBold: {
       color: colors.primary,
       fontWeight: '600',
+    },
+    // Gradient main screen styles
+    gradientBackground: {
+      flex: 1,
+      backgroundColor: '#3949AB',
+    },
+    gradientContainer: {
+      flex: 1,
+    },
+    containerTransparent: {
+      flex: 1,
+      backgroundColor: 'transparent',
+    },
+    logoImage: {
+      width: 120,
+      height: 120,
+      marginBottom: Sizes.spacing.md,
+    },
+    titleWhite: {
+      fontSize: Sizes.fontSize.xxxl,
+      fontWeight: 'bold',
+      color: '#fff',
+      marginBottom: Sizes.spacing.sm,
+    },
+    subtitleWhite: {
+      fontSize: Sizes.fontSize.lg,
+      color: 'rgba(255, 255, 255, 0.9)',
+      textAlign: 'center',
+    },
+    featureIconContainer: {
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginRight: Sizes.spacing.md,
+    },
+    featureTextWhite: {
+      fontSize: Sizes.fontSize.lg,
+      color: '#fff',
+    },
+    dividerLineWhite: {
+      flex: 1,
+      height: 1,
+      backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    },
+    dividerTextWhite: {
+      marginHorizontal: Sizes.spacing.md,
+      color: 'rgba(255, 255, 255, 0.8)',
+      fontSize: Sizes.fontSize.sm,
+    },
+    emailButtonWhite: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#fff',
+      borderRadius: Sizes.borderRadius.md,
+      height: 50,
+    },
+    emailButtonTextBlue: {
+      fontSize: Sizes.fontSize.md,
+      fontWeight: '600',
+      color: '#3949AB',
+    },
+    createAccountTextWhite: {
+      fontSize: Sizes.fontSize.md,
+      color: 'rgba(255, 255, 255, 0.9)',
+    },
+    createAccountLinkWhite: {
+      color: '#fff',
+      fontWeight: '600',
+      textDecorationLine: 'underline',
+    },
+    devBadgeWhite: {
+      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      borderRadius: Sizes.borderRadius.md,
+      padding: Sizes.spacing.md,
+      marginTop: Sizes.spacing.lg,
+    },
+    devBadgeTextWhite: {
+      fontSize: Sizes.fontSize.sm,
+      color: '#fff',
+      textAlign: 'center',
+      fontWeight: '600',
+    },
+    footerWhite: {
+      fontSize: Sizes.fontSize.sm,
+      color: 'rgba(255, 255, 255, 0.7)',
+      textAlign: 'center',
+      lineHeight: 20,
+      marginTop: Sizes.spacing.xl,
     },
   });

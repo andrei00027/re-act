@@ -10,8 +10,8 @@
 
 For the purposes of these Terms of Service:
 
-- **"App"** or **"Application"** refers to MomentumFlow, the habit tracking mobile application.
-- **"Company"** (referred to as either "the Company", "We", "Us" or "Our") refers to MomentumFlow.
+- **"App"** or **"Application"** refers to Re:Act, the habit tracking mobile application.
+- **"Company"** (referred to as either "the Company", "We", "Us" or "Our") refers to Re:Act.
 - **"Content"** means any data, text, graphics, or other materials uploaded, downloaded from, or appearing on the Service.
 - **"Device"** means any device that can access the Application such as an iPhone, iPad, or Apple Watch.
 - **"Service"** refers to the Application and all features provided within it.
@@ -23,7 +23,7 @@ For the purposes of these Terms of Service:
 
 ## 2. Agreement Acceptance
 
-By downloading, installing, or using MomentumFlow, You agree to be bound by these Terms of Service. If You do not agree to these Terms, do not use the Application.
+By downloading, installing, or using Re:Act, You agree to be bound by these Terms of Service. If You do not agree to these Terms, do not use the Application.
 
 These Terms constitute a legally binding agreement between You and the Company. By accessing or using the Service, You confirm that:
 - You have read and understood these Terms
@@ -35,7 +35,7 @@ These Terms constitute a legally binding agreement between You and the Company. 
 
 ## 3. Service Description
 
-MomentumFlow is a habit tracking application designed to help users build and maintain positive habits. The Service includes:
+Re:Act is a habit tracking application designed to help users build and maintain positive habits. The Service includes:
 
 - **Habit Creation and Management:** Create unlimited habits with customizable settings, icons, colors, and frequencies
 - **Flexible Streak Tracking:** Track your progress with our forgiving streak system that includes buffer days
@@ -66,7 +66,7 @@ You are solely responsible for:
 
 ### 4.3 Age Requirements
 
-You must be at least **13 years old** to use MomentumFlow. If You are between 13 and 17 years old, You represent that Your legal guardian has reviewed and agrees to these Terms.
+You must be at least **13 years old** to use Re:Act. If You are between 13 and 17 years old, You represent that Your legal guardian has reviewed and agrees to these Terms.
 
 Users under 13 may only use the Application under direct parental supervision.
 
@@ -144,7 +144,7 @@ You are solely responsible for Your User Content. We do not monitor, review, or 
 
 ### 7.1 Not Medical Advice
 
-MomentumFlow is a habit tracking tool and **does not provide medical advice**. The Service is not intended to:
+Re:Act is a habit tracking tool and **does not provide medical advice**. The Service is not intended to:
 - Diagnose, treat, cure, or prevent any disease or health condition
 - Replace professional medical advice, diagnosis, or treatment
 - Serve as a substitute for consultation with qualified healthcare providers
@@ -214,7 +214,7 @@ Reference to any third-party product, service, or company does not constitute ou
 
 ### 10.1 Our Property
 
-The Service and its original content (excluding User Content) are and will remain the exclusive property of MomentumFlow. This includes:
+The Service and its original content (excluding User Content) are and will remain the exclusive property of Re:Act. This includes:
 - Application design and user interface
 - Source code and algorithms
 - Graphics, logos, and icons
@@ -300,7 +300,7 @@ Some jurisdictions do not allow the exclusion of certain warranties or limitatio
 
 ## 14. Indemnification
 
-You agree to defend, indemnify, and hold harmless MomentumFlow and its officers, directors, employees, and agents from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from:
+You agree to defend, indemnify, and hold harmless Re:Act and its officers, directors, employees, and agents from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from:
 
 - Your use of the Service
 - Your violation of these Terms
@@ -368,7 +368,7 @@ We shall not be liable for any failure or delay in performance due to circumstan
 
 If you have questions about these Terms of Service:
 
-**Email:** support@momentumflow.app
+**Email:** support@react.app
 **In-App:** Settings → Contact Support
 
 ---
@@ -387,8 +387,8 @@ If you have questions about these Terms of Service:
 
 Для целей настоящих Условий использования:
 
-- **«Приложение»** означает MomentumFlow, мобильное приложение для отслеживания привычек.
-- **«Компания»** (также «мы», «нас» или «наш») означает MomentumFlow.
+- **«Приложение»** означает Re:Act, мобильное приложение для отслеживания привычек.
+- **«Компания»** (также «мы», «нас» или «наш») означает Re:Act.
 - **«Контент»** означает любые данные, текст, графику или другие материалы, загружаемые, скачиваемые или отображаемые в Сервисе.
 - **«Устройство»** означает любое устройство для использования Приложения: iPhone, iPad или Apple Watch.
 - **«Сервис»** означает Приложение и все предоставляемые им функции.
@@ -400,7 +400,7 @@ If you have questions about these Terms of Service:
 
 ## 2. Принятие соглашения
 
-Загружая, устанавливая или используя MomentumFlow, Вы соглашаетесь соблюдать настоящие Условия использования. Если Вы не согласны с Условиями, не используйте Приложение.
+Загружая, устанавливая или используя Re:Act, Вы соглашаетесь соблюдать настоящие Условия использования. Если Вы не согласны с Условиями, не используйте Приложение.
 
 Настоящие Условия представляют собой юридически обязывающее соглашение между Вами и Компанией. Используя Сервис, Вы подтверждаете, что:
 - Вы прочитали и поняли настоящие Условия
@@ -412,7 +412,7 @@ If you have questions about these Terms of Service:
 
 ## 3. Описание сервиса
 
-MomentumFlow — приложение для отслеживания привычек, помогающее пользователям формировать и поддерживать полезные привычки. Сервис включает:
+Re:Act — приложение для отслеживания привычек, помогающее пользователям формировать и поддерживать полезные привычки. Сервис включает:
 
 - **Создание и управление привычками:** Создание неограниченного количества привычек с настройками, иконками, цветами и частотой
 - **Гибкие серии:** Отслеживание прогресса с «прощающей» системой серий, включающей буферные дни
@@ -443,7 +443,7 @@ MomentumFlow — приложение для отслеживания привы
 
 ### 4.3 Возрастные требования
 
-Вам должно быть не менее **13 лет** для использования MomentumFlow. Если Вам от 13 до 17 лет, Вы подтверждаете, что Ваш законный представитель ознакомился с настоящими Условиями и согласен с ними.
+Вам должно быть не менее **13 лет** для использования Re:Act. Если Вам от 13 до 17 лет, Вы подтверждаете, что Ваш законный представитель ознакомился с настоящими Условиями и согласен с ними.
 
 Пользователи младше 13 лет могут использовать Приложение только под непосредственным присмотром родителей.
 
@@ -521,7 +521,7 @@ MomentumFlow — приложение для отслеживания привы
 
 ### 7.1 Не является медицинской консультацией
 
-MomentumFlow — инструмент для отслеживания привычек, **не предоставляющий медицинских консультаций**. Сервис не предназначен для:
+Re:Act — инструмент для отслеживания привычек, **не предоставляющий медицинских консультаций**. Сервис не предназначен для:
 - Диагностики, лечения или профилактики заболеваний
 - Замены профессиональной медицинской консультации
 - Замены консультации с квалифицированными медицинскими специалистами
@@ -591,7 +591,7 @@ MomentumFlow — инструмент для отслеживания привы
 
 ### 10.1 Наша собственность
 
-Сервис и его оригинальный контент (за исключением Пользовательского контента) являются исключительной собственностью MomentumFlow:
+Сервис и его оригинальный контент (за исключением Пользовательского контента) являются исключительной собственностью Re:Act:
 - Дизайн приложения и интерфейс
 - Исходный код и алгоритмы
 - Графика, логотипы и иконки
@@ -677,7 +677,7 @@ MomentumFlow — инструмент для отслеживания привы
 
 ## 14. Возмещение убытков
 
-Вы соглашаетесь защищать, возмещать убытки и ограждать MomentumFlow, его должностных лиц, директоров, сотрудников и агентов от любых претензий, убытков, потерь, обязательств и расходов (включая судебные издержки), возникающих из:
+Вы соглашаетесь защищать, возмещать убытки и ограждать Re:Act, его должностных лиц, директоров, сотрудников и агентов от любых претензий, убытков, потерь, обязательств и расходов (включая судебные издержки), возникающих из:
 
 - Вашего использования Сервиса
 - Вашего нарушения настоящих Условий
@@ -745,9 +745,9 @@ MomentumFlow — инструмент для отслеживания привы
 
 Если у вас есть вопросы о настоящих Условиях использования:
 
-**Email:** support@momentumflow.app
+**Email:** support@react.app
 **В приложении:** Настройки → Связаться с поддержкой
 
 ---
 
-*© 2025 MomentumFlow. All rights reserved.*
+*© 2025 Re:Act. All rights reserved.*

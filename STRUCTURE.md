@@ -1,4 +1,4 @@
-# MomentumFlow - Структура проекта
+# Re:Act - Структура проекта
 
 Полное описание архитектуры, организации папок и файлов проекта.
 
@@ -7,7 +7,7 @@
 ## 📁 Общая структура директорий
 
 ```
-MomentumFlow/
+Re:Act/
 ├── src/                        # Исходный код приложения
 │   ├── components/             # Переиспользуемые UI компоненты
 │   ├── screens/                # Экраны приложения
@@ -379,7 +379,7 @@ services/
 // src/services/storage/AsyncStorageService.js
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const HABITS_KEY = '@MomentumFlow:habits';
+const HABITS_KEY = '@Re:Act:habits';
 
 export const AsyncStorageService = {
   async saveHabits(habits) {

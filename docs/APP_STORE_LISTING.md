@@ -1,9 +1,9 @@
-# App Store Listing - MomentumFlow
+# App Store Listing - Re:Act
 
 ## 🇷🇺 Russian Version
 
 ### Название приложения (App Name)
-**MomentumFlow - Трекер Привычек**
+**Re:Act - Трекер Привычек**
 
 ### Подзаголовок (Subtitle) - 30 символов макс
 **Гибкие стрики, мотивация**
@@ -13,7 +13,7 @@
 
 ### Описание (Description)
 
-**MomentumFlow** — это трекер привычек нового поколения, созданный для тех, кто стремится к активному образу жизни и саморазвитию.
+**Re:Act** — это трекер привычек нового поколения, созданный для тех, кто стремится к активному образу жизни и саморазвитию.
 
 **🔥 Гибкие стрики**
 Забудьте о жёсткой системе! Пропустили один день — стрик не обнуляется полностью. Мы понимаем, что жизнь непредсказуема, и поддерживаем вашу мотивацию даже после промахов.
@@ -48,7 +48,7 @@
 **🌍 Локализация**
 Полная поддержка русского и английского языков.
 
-**Почему MomentumFlow?**
+**Почему Re:Act?**
 Мы верим, что формирование привычек — это не про идеальность, а про постоянство и прогресс. Наша гибкая система стриков мотивирует продолжать даже после неудач, а интеграция с Apple Health делает отслеживание максимально простым.
 
 Начните свой путь к лучшей версии себя уже сегодня!
@@ -67,7 +67,7 @@
 ## 🇬🇧 English Version
 
 ### App Name
-**MomentumFlow - Habit Tracker**
+**Re:Act - Habit Tracker**
 
 ### Subtitle - 30 chars max
 **Flexible Streaks, Motivation**
@@ -77,7 +77,7 @@ Track your habits with flexible streaks! Missed a day? Your streak continues. Ap
 
 ### Description
 
-**MomentumFlow** is a next-generation habit tracker designed for people pursuing an active lifestyle and personal growth.
+**Re:Act** is a next-generation habit tracker designed for people pursuing an active lifestyle and personal growth.
 
 **🔥 Flexible Streaks**
 Forget rigid systems! Missed one day? Your streak doesn't reset completely. We understand that life is unpredictable, and we keep you motivated even after setbacks.
@@ -112,7 +112,7 @@ Minimalist interface with smooth animations and pleasant colors.
 **🌍 Localization**
 Full support for Russian and English languages.
 
-**Why MomentumFlow?**
+**Why Re:Act?**
 We believe that building habits isn't about perfection—it's about consistency and progress. Our flexible streak system keeps you motivated even after failures, and Apple Health integration makes tracking effortless.
 
 Start your journey to a better version of yourself today!
@@ -164,21 +164,21 @@ habits,tracker,streaks,health,fitness,motivation,goals,productivity,self-improve
 - Age: 16+
 
 ## 🔐 Privacy
-MomentumFlow respects your privacy. All data is stored locally and synced via iCloud (optional). We don't collect or share any personal information.
+Re:Act respects your privacy. All data is stored locally and synced via iCloud (optional). We don't collect or share any personal information.
 
 ## 💰 Pricing
 Free with optional in-app purchases (Future: Premium features)
 
 ## 📧 Support
-Email: support@momentumflow.app (placeholder - update before submission)
-Website: https://momentumflow.app (placeholder - update before submission)
+Email: support@react.app (placeholder - update before submission)
+Website: https://react.app (placeholder - update before submission)
 
 ---
 
 ## 📝 What's New (Version 1.0.0)
 
 **RU:**
-🎉 Первый релиз MomentumFlow!
+🎉 Первый релиз Re:Act!
 
 • Неограниченное количество привычек
 • Гибкие стрики с буферными днями
@@ -188,7 +188,7 @@ Website: https://momentumflow.app (placeholder - update before submission)
 • Локализация RU/EN
 
 **EN:**
-🎉 First release of MomentumFlow!
+🎉 First release of Re:Act!
 
 • Unlimited habits
 • Flexible streaks with buffer days

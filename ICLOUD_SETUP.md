@@ -74,7 +74,7 @@ npx expo prebuild
       "NSUbiquitousContainers": {
         "iCloud.$(CFBundleIdentifier)": {
           "NSUbiquitousContainerIsDocumentScopePublic": true,
-          "NSUbiquitousContainerName": "MomentumFlow"
+          "NSUbiquitousContainerName": "Re:Act"
         }
       }
     }
@@ -87,7 +87,7 @@ npx expo prebuild
 ## Проверка iCloud на устройстве
 
 1. Настройки → Apple ID → iCloud → iCloud Drive - должен быть **включен**
-2. После установки build проверьте Настройки → Основные → Хранилище iPhone → MomentumFlow
+2. После установки build проверьте Настройки → Основные → Хранилище iPhone → Re:Act
 3. Должен появиться пункт "Документы и данные"
 
 ## Альтернатива без iCloud

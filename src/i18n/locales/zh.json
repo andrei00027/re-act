@@ -107,7 +107,12 @@
     "activeDaysMonth": "本月活跃天数",
     "days_one": "{{count}} 天",
     "days_other": "{{count}} 天",
-    "completedHabit": "已完成的习惯"
+    "completedHabit": "已完成的习惯",
+    "completionLevel": "完成程度",
+    "today": "今天",
+    "allCompleted": "全部完成",
+    "partiallyCompleted": "部分完成",
+    "noneCompleted": "未完成"
   },
   "profile": {
     "title": "个人资料",
@@ -136,7 +141,7 @@
     "deleteAccount": "删除账户",
     "deleteAccountConfirm": "这将删除你的账户和所有数据。你需要重新使用 Apple ID 登录。",
     "about": "关于",
-    "aboutMessage": "版本：1.0.0\n\n帮助你达成目标的习惯追踪应用。\n\n© 2024 MomentumFlow",
+    "aboutMessage": "版本：1.0.0\n\n帮助你达成目标的习惯追踪应用。\n\n© 2025 Re:Act",
     "ok": "确定",
     "user": "用户",
     "syncWithICloud": "同步到 iCloud",
@@ -157,10 +162,10 @@
     "daysAgo": "{{count}} 天前",
     "never": "从未",
     "madeWithLove": "用 ❤️ 为你的习惯打造",
-    "version": "MomentumFlow v1.0.0"
+    "version": "Re:Act v1.0.0"
   },
   "auth": {
-    "welcome": "欢迎使用 MomentumFlow",
+    "welcome": "欢迎使用 Re:Act",
     "subtitle": "养成持久的习惯",
     "signInWithApple": "通过 Apple 登录",
     "signInError": "登录失败，请重试。",

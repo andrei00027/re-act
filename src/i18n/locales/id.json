@@ -107,7 +107,12 @@
     "activeDaysMonth": "Hari aktif bulan ini",
     "days_one": "{{count}} hari",
     "days_other": "{{count}} hari",
-    "completedHabit": "Kebiasaan selesai"
+    "completedHabit": "Kebiasaan selesai",
+    "completionLevel": "Tingkat penyelesaian",
+    "today": "Hari ini",
+    "allCompleted": "Semua selesai",
+    "partiallyCompleted": "Sebagian",
+    "noneCompleted": "Tidak ada"
   },
   "profile": {
     "title": "Profil",
@@ -136,7 +141,7 @@
     "deleteAccount": "Hapus Akun",
     "deleteAccountConfirm": "Ini akan menghapus akunmu dan semua data. Kamu perlu masuk lagi dengan Apple ID.",
     "about": "Tentang",
-    "aboutMessage": "Versi: 1.0.0\n\nAplikasi pelacakan kebiasaan untuk mencapai tujuanmu.\n\n© 2024 MomentumFlow",
+    "aboutMessage": "Versi: 1.0.0\n\nAplikasi pelacakan kebiasaan untuk mencapai tujuanmu.\n\n© 2025 Re:Act",
     "ok": "OK",
     "user": "Pengguna",
     "syncWithICloud": "Sinkronisasi dengan iCloud",
@@ -157,10 +162,10 @@
     "daysAgo": "{{count}} hari lalu",
     "never": "Belum pernah",
     "madeWithLove": "Dibuat dengan ❤️ untuk kebiasaanmu",
-    "version": "MomentumFlow v1.0.0"
+    "version": "Re:Act v1.0.0"
   },
   "auth": {
-    "welcome": "Selamat Datang di MomentumFlow",
+    "welcome": "Selamat Datang di Re:Act",
     "subtitle": "Bangun kebiasaan yang bertahan lama",
     "signInWithApple": "Masuk dengan Apple",
     "signInError": "Gagal masuk. Silakan coba lagi.",

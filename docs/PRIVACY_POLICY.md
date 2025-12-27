@@ -10,8 +10,8 @@
 
 For the purposes of this Privacy Policy:
 
-- **"App"** or **"Application"** refers to MomentumFlow, the habit tracking mobile application.
-- **"Company"** (referred to as either "the Company", "We", "Us" or "Our") refers to MomentumFlow.
+- **"App"** or **"Application"** refers to Re:Act, the habit tracking mobile application.
+- **"Company"** (referred to as either "the Company", "We", "Us" or "Our") refers to Re:Act.
 - **"Device"** means any device that can access the Application such as an iPhone, iPad, or Apple Watch.
 - **"Personal Data"** means any information that relates to an identified or identifiable individual.
 - **"Service"** refers to the Application and all features provided within it.
@@ -23,7 +23,7 @@ For the purposes of this Privacy Policy:
 
 ## 2. Introduction
 
-MomentumFlow is committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, and protect your information when you use our habit tracking application.
+Re:Act is committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, and protect your information when you use our habit tracking application.
 
 We operate on a **local-first architecture** principle, meaning your data is primarily stored on your device, and we have no access to it. This policy describes our minimal data practices and your rights regarding your personal information.
 
@@ -184,7 +184,7 @@ Removing the app from your device permanently deletes all local data.
 
 ## 10. Cookies and Tracking
 
-MomentumFlow is a mobile application and does not use cookies. We employ a **minimal tracking approach**:
+Re:Act is a mobile application and does not use cookies. We employ a **minimal tracking approach**:
 
 - No third-party tracking
 - No advertising identifiers
@@ -195,7 +195,7 @@ MomentumFlow is a mobile application and does not use cookies. We employ a **min
 
 ## 11. Children's Privacy
 
-MomentumFlow is rated 4+ and suitable for all ages. However:
+Re:Act is rated 4+ and suitable for all ages. However:
 
 - We do not knowingly collect personal information from children under 13 without parental consent
 - Users under 13 should use the app under parental supervision
@@ -207,7 +207,7 @@ If you believe your child has provided us with personal information, please cont
 
 ## 12. International Data Transfers
 
-If you use MomentumFlow outside your country of residence:
+If you use Re:Act outside your country of residence:
 - Your habit data remains on your device (local-first)
 - iCloud data may be stored in Apple's data centers in various locations
 - Apple manages international data transfers in compliance with applicable laws
@@ -261,7 +261,7 @@ Your continued use of the Application after changes constitutes acceptance of th
 
 If you have questions about this Privacy Policy or your data:
 
-**Email:** support@momentumflow.app
+**Email:** support@react.app
 **In-App:** Settings → Contact Support
 
 We will respond to your inquiry within 30 days.
@@ -282,8 +282,8 @@ We will respond to your inquiry within 30 days.
 
 Для целей настоящей Политики конфиденциальности:
 
-- **«Приложение»** означает MomentumFlow, мобильное приложение для отслеживания привычек.
-- **«Компания»** (также «мы», «нас» или «наш») означает MomentumFlow.
+- **«Приложение»** означает Re:Act, мобильное приложение для отслеживания привычек.
+- **«Компания»** (также «мы», «нас» или «наш») означает Re:Act.
 - **«Устройство»** означает любое устройство, на котором можно использовать Приложение: iPhone, iPad или Apple Watch.
 - **«Персональные данные»** означают любую информацию, относящуюся к идентифицированному или идентифицируемому лицу.
 - **«Сервис»** означает Приложение и все предоставляемые им функции.
@@ -295,7 +295,7 @@ We will respond to your inquiry within 30 days.
 
 ## 2. Введение
 
-MomentumFlow заботится о защите вашей конфиденциальности. Настоящая Политика объясняет, как мы собираем, используем, храним и защищаем вашу информацию при использовании приложения для отслеживания привычек.
+Re:Act заботится о защите вашей конфиденциальности. Настоящая Политика объясняет, как мы собираем, используем, храним и защищаем вашу информацию при использовании приложения для отслеживания привычек.
 
 Мы следуем принципу **«сначала локально»**: ваши данные хранятся преимущественно на вашем устройстве, и мы не имеем к ним доступа. Эта политика описывает наши минимальные практики работы с данными и ваши права.
 
@@ -456,7 +456,7 @@ MomentumFlow заботится о защите вашей конфиденци�
 
 ## 10. Файлы cookie и отслеживание
 
-MomentumFlow — мобильное приложение, не использующее файлы cookie. Мы придерживаемся **минимального подхода к отслеживанию**:
+Re:Act — мобильное приложение, не использующее файлы cookie. Мы придерживаемся **минимального подхода к отслеживанию**:
 
 - Нет стороннего отслеживания
 - Нет рекламных идентификаторов
@@ -467,7 +467,7 @@ MomentumFlow — мобильное приложение, не использу�
 
 ## 11. Конфиденциальность детей
 
-MomentumFlow имеет рейтинг 4+ и подходит для всех возрастов. Однако:
+Re:Act имеет рейтинг 4+ и подходит для всех возрастов. Однако:
 
 - Мы сознательно не собираем персональную информацию детей младше 13 лет без согласия родителей
 - Пользователи младше 13 лет должны использовать приложение под присмотром родителей
@@ -479,7 +479,7 @@ MomentumFlow имеет рейтинг 4+ и подходит для всех в
 
 ## 12. Международная передача данных
 
-Если вы используете MomentumFlow за пределами страны проживания:
+Если вы используете Re:Act за пределами страны проживания:
 - Данные о привычках остаются на вашем устройстве (локальное хранение)
 - Данные iCloud могут храниться в дата-центрах Apple в различных странах
 - Apple управляет международной передачей данных в соответствии с применимым законодательством
@@ -533,11 +533,11 @@ MomentumFlow имеет рейтинг 4+ и подходит для всех в
 
 Если у вас есть вопросы о настоящей Политике конфиденциальности или ваших данных:
 
-**Email:** support@momentumflow.app
+**Email:** support@react.app
 **В приложении:** Настройки → Связаться с поддержкой
 
 Мы ответим на ваш запрос в течение 30 дней.
 
 ---
 
-*© 2025 MomentumFlow. All rights reserved.*
+*© 2025 Re:Act. All rights reserved.*

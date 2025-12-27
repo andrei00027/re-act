@@ -127,7 +127,7 @@ export const HABIT_ICON_CATEGORIES: HabitIconCategory[] = [
       { id: 'computer', name: 'Computer', category: 'learning' },
       { id: 'keyboard', name: 'Typing', category: 'learning' },
       { id: 'calculator', name: 'Math', category: 'learning' },
-      { id: 'translate', name: 'Language', category: 'learning' },
+      { id: 'global', name: 'Language', category: 'learning' },
     ],
   },
   {
