@@ -75,14 +75,30 @@
                     </ul>
 
                     <h3 class="text-lg font-medium text-neutral-200 mt-6 mb-3">2.2 Health Data (Optional)</h3>
-                    <p>If you grant permission, we access read-only data from Apple Health:</p>
+                    <p>If you grant permission, we access the following <strong class="text-neutral-200">read-only</strong> data from Apple Health:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4 mt-2">
-                        <li>Workout sessions</li>
-                        <li>Step counts</li>
-                        <li>Sleep analysis</li>
-                        <li>Active energy burned</li>
+                        <li><strong class="text-neutral-200">Workout sessions</strong> - type, duration, start/end time</li>
+                        <li><strong class="text-neutral-200">Step counts</strong> - daily total steps</li>
+                        <li><strong class="text-neutral-200">Sleep analysis</strong> - sleep duration and quality</li>
+                        <li><strong class="text-neutral-200">Active energy burned</strong> - calories from physical activity</li>
+                        <li><strong class="text-neutral-200">Distance walked/run</strong> - daily distance in kilometers or miles</li>
                     </ul>
-                    <p class="mt-2">This data is used solely to automatically mark relevant habits as complete.</p>
+
+                    <div class="mt-4 p-4 bg-neutral-900 border border-neutral-800 rounded-lg space-y-3">
+                        <p><strong class="text-white">How we use HealthKit data:</strong></p>
+                        <ul class="list-disc list-inside space-y-1 ml-4">
+                            <li>Health data is processed <strong class="text-white">locally on your device only</strong></li>
+                            <li>We check if you've met daily goals (e.g., 10,000 steps, 30 min workout)</li>
+                            <li>If goals are met, corresponding habits are automatically marked complete</li>
+                            <li><strong class="text-white">NO health data is stored permanently</strong> by our app</li>
+                            <li><strong class="text-white">NO health data is sent to external servers</strong></li>
+                            <li><strong class="text-white">NO health data is used for advertising</strong> or shared with third parties</li>
+                        </ul>
+
+                        <p class="mt-3"><strong class="text-white">Data retention:</strong> Health data is read in real-time and NOT stored. Only habit completion status is saved (not the raw health data).</p>
+
+                        <p class="mt-3"><strong class="text-white">Your control:</strong> You can revoke HealthKit permissions anytime in iOS Settings → Privacy & Security → Health → MomentumFlow. Disabling HealthKit will not affect other app features.</p>
+                    </div>
                 </section>
 
                 <section>
@@ -205,14 +221,30 @@
                     </ul>
 
                     <h3 class="text-lg font-medium text-neutral-200 mt-6 mb-3">2.2 Данные здоровья (опционально)</h3>
-                    <p>При вашем разрешении мы получаем доступ только для чтения к данным Apple Health:</p>
+                    <p>При вашем разрешении мы получаем доступ <strong class="text-neutral-200">только для чтения</strong> к следующим данным Apple Health:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4 mt-2">
-                        <li>Тренировки</li>
-                        <li>Количество шагов</li>
-                        <li>Анализ сна</li>
-                        <li>Активные калории</li>
+                        <li><strong class="text-neutral-200">Тренировки</strong> - тип, продолжительность, время начала/окончания</li>
+                        <li><strong class="text-neutral-200">Количество шагов</strong> - общее количество шагов за день</li>
+                        <li><strong class="text-neutral-200">Анализ сна</strong> - продолжительность и качество сна</li>
+                        <li><strong class="text-neutral-200">Активные калории</strong> - калории, сожженные при физической активности</li>
+                        <li><strong class="text-neutral-200">Пройденная дистанция</strong> - дневная дистанция в километрах или милях</li>
                     </ul>
-                    <p class="mt-2">Эти данные используются исключительно для автоматической отметки привычек.</p>
+
+                    <div class="mt-4 p-4 bg-neutral-900 border border-neutral-800 rounded-lg space-y-3">
+                        <p><strong class="text-white">Как мы используем данные HealthKit:</strong></p>
+                        <ul class="list-disc list-inside space-y-1 ml-4">
+                            <li>Данные здоровья обрабатываются <strong class="text-white">только локально на вашем устройстве</strong></li>
+                            <li>Мы проверяем, достигли ли вы дневных целей (например, 10,000 шагов, 30 мин тренировки)</li>
+                            <li>Если цели достигнуты, соответствующие привычки автоматически отмечаются как выполненные</li>
+                            <li><strong class="text-white">Данные здоровья НЕ хранятся постоянно</strong> нашим приложением</li>
+                            <li><strong class="text-white">Данные здоровья НЕ отправляются на внешние серверы</strong></li>
+                            <li><strong class="text-white">Данные здоровья НЕ используются для рекламы</strong> и не передаются третьим лицам</li>
+                        </ul>
+
+                        <p class="mt-3"><strong class="text-white">Хранение данных:</strong> Данные о здоровье читаются в реальном времени и НЕ сохраняются. Сохраняется только статус выполнения привычки (не сырые данные о здоровье).</p>
+
+                        <p class="mt-3"><strong class="text-white">Ваш контроль:</strong> Вы можете отозвать разрешения HealthKit в любой момент в Настройки iOS → Конфиденциальность → Здоровье → MomentumFlow. Отключение HealthKit не повлияет на другие функции приложения.</p>
+                    </div>
                 </section>
 
                 <section>
