@@ -14,6 +14,8 @@ import { useTranslation } from 'react-i18next';
 import { RefreshControl, SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+
+
 export default function HomeScreen() {
   const { t } = useTranslation();
   const colors = useThemeColors();
@@ -24,6 +26,8 @@ export default function HomeScreen() {
   const [selectedHabit, setSelectedHabit] = useState<any>(null);
   const [refreshing, setRefreshing] = useState(false);
   const { toast, hideToast, showSuccess, showError } = useToast();
+
+
 
   // Привычки, запланированные на сегодня
   const todayHabits = useMemo(() => {
@@ -132,7 +136,9 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>{t('home.title')}</Text>
+        <Text style={styles.headerTitle}>
+          {t('home.title')}
+        </Text>
         <TouchableOpacity
           style={styles.addButton}
           onPress={handleOpenCreateModal}
@@ -182,6 +188,7 @@ export default function HomeScreen() {
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
           stickySectionHeadersEnabled={false}
+          scrollEventThrottle={16}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -233,9 +240,10 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) => StyleSheet.c
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     paddingHorizontal: Sizes.spacing.md,
-    paddingVertical: Sizes.spacing.sm,
+    paddingVertical: Sizes.spacing.md,
+    minHeight: 60,
   },
   headerTitle: {
     fontSize: Sizes.fontSize.xxl,
@@ -250,6 +258,7 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) => StyleSheet.c
     alignItems: 'center',
     justifyContent: 'center',
     ...Sizes.shadow.lg,
+    marginTop: -8,
   },
   addButtonText: {
     fontSize: 28,

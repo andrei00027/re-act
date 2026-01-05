@@ -1,10 +1,10 @@
 // src/components/charts/DynamicsChart.js
-import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import { LineChart } from 'react-native-chart-kit';
-import { useTranslation } from 'react-i18next';
 import { useThemeColors } from '@/src/hooks/useThemeColors';
 import { tPlural } from '@/src/i18n';
+import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -220,6 +220,7 @@ const createStyles = (colors) => StyleSheet.create({
     fontSize: 14,
     color: colors.textSecondary,
     textAlign: 'center',
+    maxWidth: 200,
   },
 });
 

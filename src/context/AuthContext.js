@@ -176,8 +176,23 @@ export const AuthProvider = ({ children }) => {
         throw new Error('Email and password are required');
       }
 
-      const usersDB = await getUsersDB();
       const normalizedEmail = email.toLowerCase().trim();
+
+      // HARDCODED TEST ACCOUNT for App Store reviewers
+      if (normalizedEmail === 'test@architeq.io' && password === 'Test123456') {
+        const testUser = {
+          id: 'test-user-appstore',
+          email: 'test@architeq.io',
+          fullName: 'App Store Reviewer',
+          authProvider: 'email',
+          authToken: 'test-token-' + Date.now(),
+        };
+        await SecureStore.setItemAsync(USER_KEY, JSON.stringify(testUser));
+        setUser(testUser);
+        return testUser;
+      }
+
+      const usersDB = await getUsersDB();
       const userRecord = usersDB[normalizedEmail];
 
       if (!userRecord) {

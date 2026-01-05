@@ -1,14 +1,16 @@
-import { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, ActivityIndicator, Platform, Modal, Pressable } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTranslation } from 'react-i18next';
-import Icon, { IconName } from 'react-native-remix-icon';
 import { Sizes } from '@/src/constants';
-import { useThemeColors } from '@/src/hooks/useThemeColors';
-import { useTheme, THEME_OPTIONS, ThemeMode } from '@/src/context/ThemeContext';
-import { useHabits } from '@/src/context/HabitsContext';
 import { useAuth } from '@/src/context/AuthContext';
-import { SUPPORTED_LANGUAGES, changeLanguage, LanguageCode } from '@/src/i18n';
+import { useHabits } from '@/src/context/HabitsContext';
+import { THEME_OPTIONS, ThemeMode, useTheme } from '@/src/context/ThemeContext';
+import { useThemeColors } from '@/src/hooks/useThemeColors';
+import { changeLanguage, LanguageCode, SUPPORTED_LANGUAGES } from '@/src/i18n';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ActivityIndicator, Alert, Linking, Modal, Platform, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Icon, { IconName } from 'react-native-remix-icon';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+
 
 export default function ProfileScreen() {
   const { t, i18n } = useTranslation();
@@ -18,6 +20,9 @@ export default function ProfileScreen() {
   const { user, signOut, deleteAccount } = useAuth();
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
   const [themeModalVisible, setThemeModalVisible] = useState(false);
+  const [aboutModalVisible, setAboutModalVisible] = useState(false);
+
+
 
   const handleLanguageChange = async (langCode: LanguageCode) => {
     try {
@@ -72,11 +77,13 @@ export default function ProfileScreen() {
   };
 
   const handleAbout = () => {
-    Alert.alert(
-      'Re:Act',
-      t('profile.aboutMessage'),
-      [{ text: t('profile.ok') }]
-    );
+    setAboutModalVisible(true);
+  };
+
+  const openURL = (url: string) => {
+    Linking.openURL(url).catch(() => {
+      Alert.alert(t('common.error'), t('errors.generic'));
+    });
   };
 
   const handleSignOut = () => {
@@ -158,22 +165,13 @@ export default function ProfileScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>{t('profile.title')}</Text>
+        <Text style={styles.headerTitle}>{t('profile.settingsTitle')}</Text>
       </View>
 
-      <ScrollView style={styles.content}>
-        {/* Аватар и имя */}
-        <View style={styles.profileSection}>
-          <View style={styles.avatar}>
-            <Icon name="user-3-fill" size={48} color={colors.primary} />
-          </View>
-          <Text style={styles.username}>{user?.fullName || user?.email || t('profile.user')}</Text>
-          {user?.email && <Text style={styles.userEmail}>{user.email}</Text>}
-        </View>
+      <View style={styles.content}>
 
         {/* Настройки */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{t('profile.settings')}</Text>
 
           {/* Выбор темы */}
           <TouchableOpacity
@@ -185,7 +183,7 @@ export default function ProfileScreen() {
               <Text style={styles.settingText}>{t('profile.theme')}</Text>
               <Text style={styles.settingSubtext}>{getCurrentThemeName()}</Text>
             </View>
-            <Text style={styles.settingArrow}>›</Text>
+
           </TouchableOpacity>
 
           {/* Выбор языка */}
@@ -198,7 +196,7 @@ export default function ProfileScreen() {
               <Text style={styles.settingText}>{t('profile.language')}</Text>
               <Text style={styles.settingSubtext}>{getCurrentLanguageName()}</Text>
             </View>
-            <Text style={styles.settingArrow}>›</Text>
+
           </TouchableOpacity>
 
           {/* iCloud синхронизация */}
@@ -215,10 +213,8 @@ export default function ProfileScreen() {
                   {t('profile.iCloudLastSync', { time: formatSyncTime(lastSyncTime) })}
                 </Text>
               </View>
-              {isSyncing ? (
+              {isSyncing && (
                 <ActivityIndicator size="small" color={colors.primary} />
-              ) : (
-                <Text style={styles.settingArrow}>›</Text>
               )}
             </TouchableOpacity>
           )}
@@ -236,26 +232,26 @@ export default function ProfileScreen() {
                   {t('profile.connectHealth')}
                 </Text>
               </View>
-              <Text style={styles.settingArrow}>›</Text>
+
             </TouchableOpacity>
           )}
 
           <TouchableOpacity style={styles.settingItem} onPress={handleAbout}>
             <Icon name="information-fill" size={24} color={colors.primary} style={{ marginRight: Sizes.spacing.md }} />
             <Text style={styles.settingText}>{t('profile.about')}</Text>
-            <Text style={styles.settingArrow}>›</Text>
+
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.settingItem} onPress={handleDeleteAccount}>
             <Icon name="delete-bin-fill" size={24} color={colors.error} style={{ marginRight: Sizes.spacing.md }} />
             <Text style={[styles.settingText, styles.settingTextDanger]}>{t('profile.deleteAccount')}</Text>
-            <Text style={styles.settingArrow}>›</Text>
+
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.settingItem} onPress={handleSignOut}>
             <Icon name="logout-box-r-fill" size={24} color={colors.error} style={{ marginRight: Sizes.spacing.md }} />
             <Text style={[styles.settingText, styles.settingTextDanger]}>{t('profile.signOut')}</Text>
-            <Text style={styles.settingArrow}>›</Text>
+
           </TouchableOpacity>
         </View>
 
@@ -264,7 +260,7 @@ export default function ProfileScreen() {
           <Text style={styles.footerText}>{t('profile.version')}</Text>
           <Text style={styles.footerSubtext}>{t('profile.madeWithLove')}</Text>
         </View>
-      </ScrollView>
+      </View>
 
       {/* Theme Selection Modal */}
       <Modal
@@ -361,6 +357,57 @@ export default function ProfileScreen() {
           </View>
         </Pressable>
       </Modal>
+
+      {/* About Modal */}
+      <Modal
+        visible={aboutModalVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setAboutModalVisible(false)}
+      >
+        <Pressable
+          style={styles.modalOverlay}
+          onPress={() => setAboutModalVisible(false)}
+        >
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Re:Act</Text>
+            <Text style={styles.aboutDescription}>{t('profile.aboutDescription')}</Text>
+
+            <View style={styles.aboutLinks}>
+              <TouchableOpacity
+                style={styles.aboutLink}
+                onPress={() => openURL('https://architeq.io/solutions/mobile/react/terms')}
+              >
+                <Icon name="file-text-line" size={20} color={colors.primary} />
+                <Text style={styles.aboutLinkText}>{t('profile.termsOfUse')}</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.aboutLink}
+                onPress={() => openURL('https://architeq.io/solutions/mobile/react/policy')}
+              >
+                <Icon name="shield-check-line" size={20} color={colors.primary} />
+                <Text style={styles.aboutLinkText}>{t('profile.privacyPolicy')}</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.aboutLink}
+                onPress={() => openURL('https://architeq.io/solutions/mobile/react')}
+              >
+                <Icon name="global-line" size={20} color={colors.primary} />
+                <Text style={styles.aboutLinkText}>{t('profile.learnMore')}</Text>
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity
+              style={styles.modalCloseButton}
+              onPress={() => setAboutModalVisible(false)}
+            >
+              <Text style={styles.modalCloseButtonText}>{t('common.close')}</Text>
+            </TouchableOpacity>
+          </View>
+        </Pressable>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -371,8 +418,11 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) => StyleSheet.c
     backgroundColor: colors.background,
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: Sizes.spacing.md,
-    paddingVertical: Sizes.spacing.sm,
+    paddingVertical: Sizes.spacing.md,
+    minHeight: 60,
   },
   headerTitle: {
     fontSize: Sizes.fontSize.xxl,
@@ -423,7 +473,6 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) => StyleSheet.c
     marginBottom: Sizes.spacing.sm,
   },
   settingText: {
-    flex: 1,
     fontSize: Sizes.fontSize.lg,
     color: colors.text,
     fontWeight: '600',
@@ -515,13 +564,38 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) => StyleSheet.c
     fontWeight: '600',
   },
   modalCloseButton: {
-    marginTop: Sizes.spacing.md,
-    paddingVertical: Sizes.spacing.md,
+    marginTop: Sizes.spacing.sm,
+    paddingVertical: Sizes.spacing.sm,
     alignItems: 'center',
   },
   modalCloseButtonText: {
     fontSize: Sizes.fontSize.md,
     color: colors.textSecondary,
     fontWeight: '600',
+  },
+  aboutDescription: {
+    fontSize: Sizes.fontSize.md,
+    color: colors.text,
+    textAlign: 'center',
+    marginBottom: Sizes.spacing.lg,
+    lineHeight: 22,
+  },
+  aboutLinks: {
+    width: '100%',
+  },
+  aboutLink: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: Sizes.spacing.md,
+    paddingHorizontal: Sizes.spacing.md,
+    backgroundColor: colors.background,
+    borderRadius: Sizes.borderRadius.md,
+    marginBottom: Sizes.spacing.sm,
+  },
+  aboutLinkText: {
+    fontSize: Sizes.fontSize.md,
+    color: colors.primary,
+    marginLeft: Sizes.spacing.sm,
+    fontWeight: '500',
   },
 });

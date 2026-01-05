@@ -1,26 +1,27 @@
 // src/screens/AuthScreen.tsx
-import React, { useState, useEffect } from 'react';
+import { Sizes } from '@/src/constants';
+import { useAuth } from '@/src/context/AuthContext';
+import { useTheme } from '@/src/context/ThemeContext';
+import { useThemeColors } from '@/src/hooks/useThemeColors';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import * as AppleAuthentication from 'expo-apple-authentication';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
-  View,
-  Text,
-  StyleSheet,
-  Alert,
-  Platform,
-  TouchableOpacity,
-  TextInput,
-  KeyboardAvoidingView,
-  ScrollView,
   ActivityIndicator,
+  Alert,
   Image,
+  KeyboardAvoidingView,
+  Linking,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import * as AppleAuthentication from 'expo-apple-authentication';
-import { useAuth } from '@/src/context/AuthContext';
-import { Sizes } from '@/src/constants';
-import { useThemeColors } from '@/src/hooks/useThemeColors';
-import { useTheme } from '@/src/context/ThemeContext';
-import { useTranslation } from 'react-i18next';
-import Ionicons from '@expo/vector-icons/Ionicons';
 
 type AuthMode = 'main' | 'email-signin' | 'email-signup';
 
@@ -297,13 +298,14 @@ export default function AuthScreen() {
       <SafeAreaView style={styles.containerTransparent}>
         <View style={styles.content}>
           <View style={styles.header}>
-            <Image
-              source={require('@/assets/images/splash-icon.png')}
-              style={styles.logoImage}
-              resizeMode="contain"
-            />
+            <View style={styles.logoContainer}>
+              <Image
+                source={require('@/assets/images/splash-icon.png')}
+                style={styles.logoImage}
+                resizeMode="contain"
+              />
+            </View>
             <Text style={styles.titleWhite}>Re:Act</Text>
-            <Text style={styles.subtitleWhite}>{t('auth.subtitle')}</Text>
           </View>
 
           <View style={styles.features}>
@@ -338,32 +340,6 @@ export default function AuthScreen() {
                 onPress={handleAppleSignIn}
               />
             )}
-
-            {/* Divider */}
-            <View style={styles.divider}>
-              <View style={styles.dividerLineWhite} />
-              <Text style={styles.dividerTextWhite}>{t('auth.or')}</Text>
-              <View style={styles.dividerLineWhite} />
-            </View>
-
-            {/* Email Sign In */}
-            <TouchableOpacity
-              style={styles.emailButtonWhite}
-              onPress={() => setAuthMode('email-signin')}
-            >
-              <Ionicons name="mail-outline" size={20} color="#3949AB" style={styles.emailIcon} />
-              <Text style={styles.emailButtonTextBlue}>{t('auth.signInWithEmail')}</Text>
-            </TouchableOpacity>
-
-            {/* Create Account Link */}
-            <TouchableOpacity
-              style={styles.createAccountButton}
-              onPress={() => setAuthMode('email-signup')}
-            >
-              <Text style={styles.createAccountTextWhite}>
-                {t('auth.noAccount')} <Text style={styles.createAccountLinkWhite}>{t('auth.signUp')}</Text>
-              </Text>
-            </TouchableOpacity>
           </View>
 
           {!isAppleAvailable && Platform.OS === 'ios' && (
@@ -374,7 +350,20 @@ export default function AuthScreen() {
             </View>
           )}
 
-          <Text style={styles.footerWhite}>{t('auth.terms')}</Text>
+          <View style={styles.footerContainer}>
+            <Text style={styles.footerTextWhite}>
+              {t('auth.termsPrefix')}
+            </Text>
+            <View style={styles.footerLinks}>
+              <TouchableOpacity onPress={() => Linking.openURL('https://architeq.io/solutions/mobile/react/terms')}>
+                <Text style={styles.footerLinkWhite}>{t('auth.termsOfUse')}</Text>
+              </TouchableOpacity>
+              <Text style={styles.footerTextWhite}> {t('auth.and')} </Text>
+              <TouchableOpacity onPress={() => Linking.openURL('https://architeq.io/solutions/mobile/react/policy')}>
+                <Text style={styles.footerLinkWhite}>{t('auth.privacyPolicy')}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </SafeAreaView>
     </View>
@@ -398,7 +387,9 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
     content: {
       flex: 1,
       paddingHorizontal: Sizes.spacing.xl,
-      justifyContent: 'center',
+      paddingTop: Sizes.spacing.xxl,    // Equal top padding
+      paddingBottom: Sizes.spacing.xxl, // Equal bottom padding
+      justifyContent: 'space-between',  // Distribute items vertically
     },
     backButton: {
       width: 40,
@@ -411,8 +402,7 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
     },
     header: {
       alignItems: 'center',
-      marginTop: Sizes.spacing.xxl,
-      marginBottom: Sizes.spacing.xxl,
+      // Removed large margins to let space-between handle distribution
     },
     logo: {
       fontSize: 80,
@@ -430,7 +420,7 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
       textAlign: 'center',
     },
     features: {
-      marginBottom: Sizes.spacing.xxl * 2,
+      // Adjusted margin to prevent excessive gap
     },
     feature: {
       flexDirection: 'row',
@@ -447,6 +437,7 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
     },
     authButtons: {
       gap: Sizes.spacing.md,
+      width: '100%',
     },
     appleButton: {
       width: '100%',
@@ -598,21 +589,21 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
       flex: 1,
       backgroundColor: 'transparent',
     },
+    logoContainer: {
+      backgroundColor: '#fff',
+      borderRadius: 24,
+      marginBottom: Sizes.spacing.md,
+    },
     logoImage: {
       width: 120,
       height: 120,
-      marginBottom: Sizes.spacing.md,
+      borderRadius: 16,
     },
     titleWhite: {
       fontSize: Sizes.fontSize.xxxl,
       fontWeight: 'bold',
       color: '#fff',
       marginBottom: Sizes.spacing.sm,
-    },
-    subtitleWhite: {
-      fontSize: Sizes.fontSize.lg,
-      color: 'rgba(255, 255, 255, 0.9)',
-      textAlign: 'center',
     },
     featureIconContainer: {
       width: 44,
@@ -670,6 +661,27 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
       color: '#fff',
       textAlign: 'center',
       fontWeight: '600',
+    },
+    footerContainer: {
+      alignItems: 'center',
+      paddingHorizontal: Sizes.spacing.md,
+    },
+    footerTextWhite: {
+      fontSize: Sizes.fontSize.sm,
+      color: 'rgba(255, 255, 255, 0.7)',
+      textAlign: 'center',
+    },
+    footerLinks: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 4,
+    },
+    footerLinkWhite: {
+      fontSize: Sizes.fontSize.sm,
+      color: '#fff',
+      textDecorationLine: 'underline',
     },
     footerWhite: {
       fontSize: Sizes.fontSize.sm,

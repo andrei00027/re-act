@@ -116,6 +116,7 @@
   },
   "profile": {
     "title": "个人资料",
+    "settingsTitle": "设置",
     "settings": "设置",
     "account": "账户",
     "signOut": "退出登录",
@@ -142,6 +143,10 @@
     "deleteAccountConfirm": "这将删除你的账户和所有数据。你需要重新使用 Apple ID 登录。",
     "about": "关于",
     "aboutMessage": "版本：1.0.0\n\n帮助你达成目标的习惯追踪应用。\n\n© 2025 Re:Act",
+    "aboutDescription": "帮助你达成目标的习惯追踪应用。",
+    "learnMore": "了解更多",
+    "termsOfUse": "使用条款",
+    "privacyPolicy": "隐私政策",
     "ok": "确定",
     "user": "用户",
     "syncWithICloud": "同步到 iCloud",

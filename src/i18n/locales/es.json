@@ -116,6 +116,7 @@
   },
   "profile": {
     "title": "Perfil",
+    "settingsTitle": "Configuración",
     "settings": "Configuración",
     "account": "Cuenta",
     "signOut": "Cerrar Sesión",
@@ -142,6 +143,10 @@
     "deleteAccountConfirm": "Esto eliminará tu cuenta y todos los datos. Tendrás que iniciar sesión de nuevo con Apple ID.",
     "about": "Acerca de",
     "aboutMessage": "Versión: 1.0.0\n\nAplicación de seguimiento de hábitos para alcanzar tus metas.\n\n© 2025 Re:Act",
+    "aboutDescription": "Aplicación de seguimiento de hábitos para alcanzar tus metas.",
+    "learnMore": "Más información",
+    "termsOfUse": "Términos de uso",
+    "privacyPolicy": "Política de privacidad",
     "ok": "OK",
     "user": "Usuario",
     "syncWithICloud": "Sincronizar con iCloud",

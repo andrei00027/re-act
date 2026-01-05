@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View, ScrollView, Modal, TouchableOpacity, Pressable } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Calendar, LocaleConfig, DateData } from 'react-native-calendars';
-import { useTranslation } from 'react-i18next';
+import { HabitIcon } from '@/src/components/common/HabitIcon';
 import { Sizes } from '@/src/constants';
-import { useThemeColors } from '@/src/hooks/useThemeColors';
 import { useHabits } from '@/src/context/HabitsContext';
-import { useMemo, useState, useCallback } from 'react';
+import { useThemeColors } from '@/src/hooks/useThemeColors';
 import { tPlural } from '@/src/i18n';
 import { Ionicons } from '@expo/vector-icons';
-import { HabitIcon } from '@/src/components/common/HabitIcon';
+import { useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Modal, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Calendar, DateData, LocaleConfig } from 'react-native-calendars';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Configure Russian locale for calendar
 LocaleConfig.locales['ru'] = {
@@ -300,7 +300,7 @@ export default function CalendarScreen() {
         <Text style={styles.headerTitle}>{t('calendar.title')}</Text>
       </View>
 
-      <ScrollView style={styles.content}>
+      <ScrollView style={styles.content} scrollEnabled={false}>
         <View style={styles.statsCard}>
           <Text style={styles.statsLabel}>{t('calendar.activeDaysMonth')}</Text>
           <Text style={styles.statsValue}>{tPlural('calendar.days', monthStats)}</Text>
@@ -418,8 +418,11 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) => StyleSheet.c
     backgroundColor: colors.background,
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: Sizes.spacing.md,
-    paddingVertical: Sizes.spacing.sm,
+    paddingVertical: Sizes.spacing.md,
+    minHeight: 60,
   },
   headerTitle: {
     fontSize: Sizes.fontSize.xxl,

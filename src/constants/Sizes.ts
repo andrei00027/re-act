@@ -1,34 +1,39 @@
-// src/constants/Sizes.js
+// src/constants/Sizes.ts
+// Responsive sizing system for consistent UI across iOS devices
+// Uses Scale.ts for proportional scaling based on iPhone 14 base design
+
+import { fontScale, scale } from './Scale';
+
 export const Sizes = {
   spacing: {
-    xs: 4,
-    sm: 8,
-    md: 16,
-    lg: 24,
-    xl: 32,
-    xxl: 40,
+    xs: scale(4),
+    sm: scale(8),
+    md: scale(16),
+    lg: scale(24),
+    xl: scale(32),
+    xxl: scale(40),
   },
 
   borderRadius: {
-    sm: 4,
-    md: 8,
-    lg: 12,
-    xl: 16,
-    xxl: 20,
-    full: 9999,
+    sm: scale(4),
+    md: scale(8),
+    lg: scale(12),
+    xl: scale(16),
+    xxl: scale(20),
+    full: 9999, // Stays constant for perfect circles
   },
 
   fontSize: {
-    xs: 10,
-    sm: 12,
-    md: 14,
-    lg: 16,
-    xl: 18,
-    xxl: 24,
-    xxxl: 32,
+    xs: fontScale(10),
+    sm: fontScale(12),
+    md: fontScale(14),
+    lg: fontScale(16),
+    xl: fontScale(18),
+    xxl: fontScale(24),
+    xxxl: fontScale(32),
   },
 
-  // Система теней для консистентности
+  // Система теней для консистентности (scaled)
   shadow: {
     none: {
       shadowColor: 'transparent',
@@ -39,35 +44,35 @@ export const Sizes = {
     },
     sm: {
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 1 },
+      shadowOffset: { width: 0, height: scale(1) },
       shadowOpacity: 0.05,
-      shadowRadius: 2,
+      shadowRadius: scale(2),
       elevation: 1,
     },
     md: {
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
+      shadowOffset: { width: 0, height: scale(2) },
       shadowOpacity: 0.1,
-      shadowRadius: 4,
+      shadowRadius: scale(4),
       elevation: 2,
     },
     lg: {
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 4 },
+      shadowOffset: { width: 0, height: scale(4) },
       shadowOpacity: 0.15,
-      shadowRadius: 8,
+      shadowRadius: scale(8),
       elevation: 4,
     },
     xl: {
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 8 },
+      shadowOffset: { width: 0, height: scale(8) },
       shadowOpacity: 0.2,
-      shadowRadius: 16,
+      shadowRadius: scale(16),
       elevation: 8,
     },
   },
 
-  // Веса шрифтов для консистентности
+  // Веса шрифтов для консистентности (не масштабируются)
   fontWeight: {
     regular: '400' as const,
     medium: '500' as const,

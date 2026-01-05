@@ -1,11 +1,13 @@
 // src/components/charts/TimeChart.js
-import React, { useMemo } from 'react';
-import { View, StyleSheet } from 'react-native';
 import { useThemeColors } from '@/src/hooks/useThemeColors';
-import Svg, { Path, Circle, Text as SvgText } from 'react-native-svg';
+import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { StyleSheet, Text, View } from 'react-native';
+import Svg, { Circle, Path, Text as SvgText } from 'react-native-svg';
 
 const TimeChart = ({ completionHistory }) => {
   const colors = useThemeColors();
+  const { t } = useTranslation();
 
   const chartData = useMemo(() => {
     if (!completionHistory || Object.keys(completionHistory).length === 0) {
@@ -34,8 +36,15 @@ const TimeChart = ({ completionHistory }) => {
     };
   }, [completionHistory]);
 
+  const styles = createStyles(colors);
+
   if (!chartData) {
-    return null;
+    return (
+      <View style={styles.emptyState}>
+        <Text style={styles.emptyText}>{t('charts.noData')}</Text>
+        <Text style={styles.emptySubtext}>{t('charts.noDataHint')}</Text>
+      </View>
+    );
   }
 
   const chartWidth = 140;
@@ -124,11 +133,30 @@ const TimeChart = ({ completionHistory }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors) => StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  emptyState: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 20,
+  },
+  emptyText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: colors.text,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  emptySubtext: {
+    fontSize: 14,
+    color: colors.textSecondary,
+    textAlign: 'center',
+    maxWidth: 200,
   },
 });
 

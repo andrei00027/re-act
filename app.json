@@ -31,8 +31,8 @@
             "NSUbiquitousContainerSupportedFolderLevels": "Any"
           }
         },
-        "NSHealthShareUsageDescription": "Re:Act нужен доступ к вашим данным здоровья, чтобы автоматически отмечать выполнение привычек (тренировки, шаги, сон).",
-        "NSHealthUpdateUsageDescription": "Re:Act нужен доступ для записи данных о ваших привычках в Apple Health."
+        "NSHealthShareUsageDescription": "Re:Act needs access to your health data to automatically mark habits as complete based on your workouts, steps, and sleep.",
+        "NSHealthUpdateUsageDescription": "Re:Act needs permission to write your habit tracking data to Apple Health."
       }
     },
     "android": {

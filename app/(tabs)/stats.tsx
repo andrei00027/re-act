@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTranslation } from 'react-i18next';
-import { Sizes } from '@/src/constants';
-import { useThemeColors } from '@/src/hooks/useThemeColors';
-import { useHabits } from '@/src/context/HabitsContext';
-import { useMemo, useState } from 'react';
+import CompletionsByDayChart from '@/src/components/charts/CompletionsByDayChart';
 import DynamicsChart from '@/src/components/charts/DynamicsChart';
 import TimeChart from '@/src/components/charts/TimeChart';
-import CompletionsByDayChart from '@/src/components/charts/CompletionsByDayChart';
 import { HabitIcon } from '@/src/components/common/HabitIcon';
+import { Sizes } from '@/src/constants';
+import { useHabits } from '@/src/context/HabitsContext';
+import { useThemeColors } from '@/src/hooks/useThemeColors';
+import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function StatsScreen() {
   const { t } = useTranslation();
@@ -154,8 +154,11 @@ const createStyles = (colors: ReturnType<typeof useThemeColors>) => StyleSheet.c
     backgroundColor: colors.background,
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: Sizes.spacing.md,
-    paddingVertical: Sizes.spacing.sm,
+    paddingVertical: Sizes.spacing.md,
+    minHeight: 60,
   },
   headerTitle: {
     fontSize: Sizes.fontSize.xxl,

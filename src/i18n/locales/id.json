@@ -116,6 +116,7 @@
   },
   "profile": {
     "title": "Profil",
+    "settingsTitle": "Pengaturan",
     "settings": "Pengaturan",
     "account": "Akun",
     "signOut": "Keluar",
@@ -142,6 +143,10 @@
     "deleteAccountConfirm": "Ini akan menghapus akunmu dan semua data. Kamu perlu masuk lagi dengan Apple ID.",
     "about": "Tentang",
     "aboutMessage": "Versi: 1.0.0\n\nAplikasi pelacakan kebiasaan untuk mencapai tujuanmu.\n\n© 2025 Re:Act",
+    "aboutDescription": "Aplikasi pelacakan kebiasaan untuk mencapai tujuanmu.",
+    "learnMore": "Pelajari lebih lanjut",
+    "termsOfUse": "Syarat penggunaan",
+    "privacyPolicy": "Kebijakan privasi",
     "ok": "OK",
     "user": "Pengguna",
     "syncWithICloud": "Sinkronisasi dengan iCloud",

@@ -1,10 +1,10 @@
 // src/context/HabitsContext.js
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { AsyncStorageService } from '@/src/services/storage/AsyncStorageService';
-import NotificationService from '@/src/services/notifications/NotificationService';
-import CloudStorageService from '@/src/services/storage/CloudStorageService';
 import AppleHealthService from '@/src/services/health/AppleHealthService';
+import NotificationService from '@/src/services/notifications/NotificationService';
+import { AsyncStorageService } from '@/src/services/storage/AsyncStorageService';
+import CloudStorageService from '@/src/services/storage/CloudStorageService';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const HabitsContext = createContext();
 
@@ -92,8 +92,8 @@ export const HabitsProvider = ({ children }) => {
 
   const loadHabitsFromStorage = async () => {
     const loadedHabits = await AsyncStorageService.loadHabits();
-    // Если нет сохраненных привычек, используем моковые данные
-    setHabits(loadedHabits.length > 0 ? loadedHabits : getMockHabits(t));
+    // Если нет сохраненных привычек, показываем пустое состояние
+    setHabits(loadedHabits);
     setIsLoaded(true);
   };
 

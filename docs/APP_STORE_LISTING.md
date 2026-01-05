@@ -170,8 +170,8 @@ Re:Act respects your privacy. All data is stored locally and synced via iCloud (
 Free with optional in-app purchases (Future: Premium features)
 
 ## 📧 Support
-Email: support@react.app (placeholder - update before submission)
-Website: https://react.app (placeholder - update before submission)
+Email: hi@architeq.io
+Website: https://architeq.io
 
 ---
 
