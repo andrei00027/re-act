@@ -41,3 +41,9 @@ app-example
 # generated native folders
 /ios
 /android
+
+# documentation (local only)
+CHECKLIST.md
+CLAUDE.md
+STRUCTURE.md
+README.md
